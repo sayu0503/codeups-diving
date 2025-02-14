@@ -18,97 +18,87 @@
     </div>
 
     <!-- パンくず -->
-    <div class="page-bredcrumb bredcrumb">
-      <div class="bredcrumb__inner inner">
-        <p class="bredcrumb__text">
-          <a href="index.html" class="berdcrumb__link">TOP</a>
-        </p>
-        <p class="bredcrumb__text">料金一覧</p>
-      </div>
-    </div>
+    <?php get_template_part('parts/breadcrumb')?>
 
     <!-- 下層Price -->
     <section class="layout-price page-price">
       <div class="page-price__inner inner">
         <div class="page-price__contents">
-          <!-- セクション1：ライセンス講習 -->
-          <div class="page-price__group" id="page-price__group01">
+          <!-- ライセンス講習 -->
+          <div class="page-price__group">
             <h2 class="page-price__title">ライセンス講習</h2>
             <div class="page-price__items">
-              <div class="page-price__item">
-                <span class="page-price__list">オープンウォーター<br class="u-mobile">ダイバーコース</span>
-                <span class="page-price__price">¥50,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list page-price__list--layout">アドバンスド<br class="u-mobile">オープンウォーターコース</span>
-                <span class="page-price__price">¥60,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list">レスキュー＋EFRコース</span>
-                <span class="page-price__price">¥70,000</span>
-              </div>
+              <?php
+              $license_menus = SCF::get('license_menu');
+              $license_prices = SCF::get('license_price');
+
+              if (!empty($license_menus)) :
+                foreach ($license_menus as $index => $menu) :
+                  $price = isset($license_prices[$index]) ? $license_prices[$index] : '';
+              ?>
+                <div class="page-price__item">
+                  <span class="page-price__list"><?php echo esc_html($menu); ?></span>
+                  <span class="page-price__price">¥<?php echo number_format((int) $price); ?></span>
+                </div>
+              <?php endforeach; endif; ?>
             </div>
           </div>
-          <!-- セクション2：体験ダイビング -->
-          <div class="page-price__group" id="page-price__group02">
+          <!-- 体験ダイビング -->
+          <div class="page-price__group">
             <h2 class="page-price__title">体験ダイビング</h2>
             <div class="page-price__items">
-              <div class="page-price__item">
-                <span class="page-price__list">ビーチ体験ダイビング<br class="u-mobile">(半日)</span>
-                <span class="page-price__price">¥7,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list">ビーチ体験ダイビング<br class="u-mobile">(1日)</span>
-                <span class="page-price__price">¥14,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list">ボート体験ダイビング<br class="u-mobile">(半日)</span>
-                <span class="page-price__price">¥10,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list">ボート体験ダイビング<br class="u-mobile">(1日)</span>
-                <span class="page-price__price">¥18,000</span>
-              </div>
+              <?php
+              $experience_menus = SCF::get('experience_menu');
+              $experience_prices = SCF::get('experience_price');
+
+              if (!empty($experience_menus)) :
+                foreach ($experience_menus as $index => $menu) :
+                  $price = isset($experience_prices[$index]) ? $experience_prices[$index] : '';
+              ?>
+                <div class="page-price__item">
+                  <span class="page-price__list"><?php echo esc_html($menu); ?></span>
+                  <span class="page-price__price">¥<?php echo number_format((int) $price); ?></span>
+                </div>
+              <?php endforeach; endif; ?>
             </div>
           </div>
-          <!-- セクション3：ファンダイビング -->
-          <div class="page-price__group" id="page-price__group03">
+          <!-- ファンダイビング -->
+          <div class="page-price__group">
             <h2 class="page-price__title">ファンダイビング</h2>
             <div class="page-price__items">
-              <div class="page-price__item">
-                <span class="page-price__list">ビーチダイビング<br class="u-mobile">(2ダイブ)</span>
-                <span class="page-price__price">¥14,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list">ボートダイビング<br class="u-mobile">(2ダイブ)</span>
-                <span class="page-price__price">¥18,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list">スペシャルダイビング<br class="u-mobile">(2ダイブ)</span>
-                <span class="page-price__price">¥24,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list">ナイトダイビング<br class="u-mobile">(1ダイブ)</span>
-                <span class="page-price__price">¥10,000</span>
-              </div>
+              <?php 
+              $fundiving_menus = SCF::get('fundiving_menu');
+              $fundiving_prices = SCF::get('fundiving_price');
+
+              if (!empty($fundiving_menus)) :
+                foreach ($fundiving_menus as $index => $menu) :
+                  $price = isset($fundiving_prices[$index]) ? $fundiving_prices[$index] : '';
+              ?>
+                <div class="page-price__item">
+                  <span class="page-price__list"><?php echo esc_html($menu); ?></span>
+                  <span class="page-price__price">¥<?php echo number_format((int) $price); ?></span>
+                </div>
+              <?php endforeach; endif; ?>
             </div>
           </div>
-          <!-- セクション4：スペシャルダイビング -->
-          <div class="page-price__group" id="page-price__group04">
+
+          <!-- スペシャルダイビング -->
+          <div class="page-price__group">
             <h2 class="page-price__title">スペシャルダイビング</h2>
             <div class="page-price__items">
-              <div class="page-price__item">
-                <span class="page-price__list">貸切ダイビング<br class="u-mobile">(2ダイブ)</span>
-                <span class="page-price__price">24,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list">1日ダイビング<br class="u-mobile">(3ダイブ)</span>
-                <span class="page-price__price">¥32,000</span>
-              </div>
-              <div class="page-price__item">
-                <span class="page-price__list">1日ダイナイトダイビング<br class="u-mobile">(2ダイブ)</span>
-                <span class="page-price__price">¥14,000</span>
-              </div>
+              <?php 
+              $specialdiving_menus = SCF::get('specialdiving_menu');
+              $specialdiving_prices = SCF::get('specialdiving_price');
+
+              if (!empty($specialdiving_menus)) :
+                foreach ($specialdiving_menus as $index => $menu) :
+                  $price = isset($specialdiving_prices[$index]) ? $specialdiving_prices[$index] : '';
+              ?>
+                <div class="page-price__item">
+                  <span class="page-price__list"><?php echo esc_html($menu); ?></span>
+                  <span class="page-price__price">¥<?php echo number_format((int) $price); ?></span>
+                </div>
+              <?php endforeach; endif; ?>
             </div>
           </div>
         </div>

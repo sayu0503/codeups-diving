@@ -122,4 +122,21 @@ function Change_menulabel() {
         );
     }
     add_action( 'after_setup_theme', 'my_setup' );
-    
+
+// アーカイブの表示件数変更
+function change_posts_per_page($query) {
+    if (is_admin() || !$query->is_main_query()) {
+        return;
+    }
+
+    // campaign のアーカイブページは 4 件表示
+    if ($query->is_post_type_archive('campaign')) {
+        $query->set('posts_per_page', 4);
+    }
+
+    // voice のアーカイブページは 6 件表示
+    if ($query->is_post_type_archive('voice')) {
+        $query->set('posts_per_page', 6);
+    }
+}
+

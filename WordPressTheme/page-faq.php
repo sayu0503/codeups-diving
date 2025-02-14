@@ -17,68 +17,30 @@
 </div>
 
 <!-- パンくず -->
-<div class="page-bredcrumb bredcrumb">
-  <div class="bredcrumb__inner inner">
-    <p class="bredcrumb__text">
-      <a href="index.html" class="berdcrumb__link">TOP</a>
-    </p>
-    <p class="bredcrumb__text">よくある質問</p>
-  </div>
-</div>
+<?php get_template_part('parts/breadcrumb')?>
 
 <!-- 下層FAQ -->
 <div class="layout-faq page-faq">
   <div class="page-faq__inner inner">
     <div class="page-faq__content accordion__items">
-      <!--  アコーディオン１  -->
+    <?php 
+      // SCFからFAQデータを取得
+      $faq_list = SCF::get('faq_list');
+
+      // FAQが登録されている場合のみループを実行
+      if (!empty($faq_list)) :
+        foreach ($faq_list as $faq) :
+          $question = esc_html($faq['question']); // 質問
+          $answer = nl2br(esc_html($faq['answer'])); // 答え（改行を有効にする）
+      ?>
       <dl class="accordion__item">
-        <dt class="accordion__header">ここに質問が入ります。</dt>
-        <dd class="accordion__content">
-          ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-        </dd>
+        <dt class="accordion__header"><?php echo $question; ?></dt>
+        <dd class="accordion__content"><?php echo $answer; ?></dd>
       </dl>
-      <!--  アコーディオン2  -->
-      <dl class="accordion__item">
-        <dt class="accordion__header">ここに質問が入ります。</dt>
-        <dd class="accordion__content">
-          ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-        </dd>
-      </dl>
-      <!--  アコーディオン3  -->
-      <dl class="accordion__item">
-        <dt class="accordion__header">ここに質問が入ります。</dt>
-        <dd class="accordion__content">
-          ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-        </dd>
-      </dl>
-      <!--  アコーディオン4  -->
-      <dl class="accordion__item">
-        <dt class="accordion__header">ここに質問が入ります。</dt>
-        <dd class="accordion__content">
-          ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-        </dd>
-      </dl>
-      <!--  アコーディオン5  -->
-      <dl class="accordion__item">
-        <dt class="accordion__header">ここに質問が入ります。</dt>
-        <dd class="accordion__content">
-          ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-        </dd>
-      </dl>
-      <!--  アコーディオン6  -->
-      <dl class="accordion__item">
-        <dt class="accordion__header">ここに質問が入ります。</dt>
-        <dd class="accordion__content">
-          ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-        </dd>
-      </dl>
-      <!--  アコーディオン7  -->
-      <dl class="accordion__item">
-        <dt class="accordion__header">ここに質問が入ります。</dt>
-        <dd class="accordion__content">
-          ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-        </dd>
-      </dl>
+      <?php
+        endforeach;
+      endif;
+      ?>
     </div>
   </div>
 </div>

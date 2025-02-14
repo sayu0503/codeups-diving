@@ -1,16 +1,16 @@
 @use "global" as *;
 
-.bredcrumb__inner {
+.breadcrumb__inner {
     display: flex;
     flex-wrap: wrap;
 }
 
-.bredcrumb__text {
+.breadcrumb__text {
     display: flex;
     align-items: center;
 }
 
-.bredcrumb__text:not(:last-of-type)::after {
+.breadcrumb__text::after {
     display: inline-block;
     transform: rotate(45deg);
     width: rem(7);
@@ -22,7 +22,7 @@
     content: '';
 }
 
-.bredcrumb__text {
+.breadcrumb__text {
     font-size: rem(14);
     font-weight: $regular;
     font-family: $base-font-family;
@@ -31,12 +31,31 @@
     letter-spacing: 0;
 }
 
-.bredcrumb__text--color,
-.berdcrumb__link--color {
+.breadcrumb__inner span,
+.breadcrumb__inner span a{
+    display: flex;
+    align-items: center;
+    font-size: rem(14);
+    font-weight: $regular;
+    font-family: $base-font-family;
+    color: $green;
+    line-height: calc(20 / 14);
+    letter-spacing: 0;
+}
+
+
+.breadcrumb__text--color,
+.breadcrumb__link--color {
     color: $white;
 }
-.bredcrumb__text--color:not(:last-of-type)::after {
+.breadcrumb__text--color:not(:last-of-type)::after {
     border-top: 1px solid $white;
     border-right: 1px solid $white;
     content: '';
+}
+
+
+
+.breadcrumb__inner span a:hover {
+
 }

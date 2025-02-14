@@ -16,14 +16,7 @@
       </div>
 
       <!-- パンくず -->
-      <div class="page-bredcrumb bredcrumb">
-        <div class="bredcrumb__inner inner">
-          <p class="bredcrumb__text">
-            <a href="index.html" class="berdcrumb__link">TOP</a></p>
-          <p class="bredcrumb__text">お問い合わせ</p>
-          <p class="bredcrumb__text">送信完了</p>
-        </div>
-      </div>
+      <?php get_template_part('parts/breadcrumb')?>
       <!-- 下層サンクスページ -->
       <div class="layout-thanks page-thanks">
         <div class="page-thanks__inner inner">

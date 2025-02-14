@@ -38,7 +38,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.category__item:first-child .category__item-text {
+.category__item.is-active .category__item-text {
     background-color: $green-accent;
     color: $white;
 }
