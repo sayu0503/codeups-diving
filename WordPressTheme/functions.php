@@ -140,3 +140,7 @@ function change_posts_per_page($query) {
     }
 }
 
+function my_acf_format_value($value, $post_id, $field) {
+    return wpautop($value);
+}
+add_filter('acf/format_value/type=wysiwyg', 'my_acf_format_value', 10, 3);

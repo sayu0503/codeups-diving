@@ -58,30 +58,33 @@
             <h2 class="section-header__subtitle section-header__subtitle--layout">フォト</h2>
         </div>
         <div class="gallery__contents">
-            <div class="gallery__image js-modal-open">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/gallery1.jpg" alt="赤い小さな魚の群れ" decoding="async" loading="lazy" width="1492"
-                    height="984">
-            </div>
-            <div class="gallery__image js-modal-open">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/gallery2.jpg" alt="海に浮かぶ船" decoding="async" loading="lazy" width="1160"
-                    height="738">
-            </div>
-            <div class="gallery__image js-modal-open">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/gallery3.jpg" alt="縞模様の熱帯魚" decoding="async" loading="lazy" width="1160"
-                    height="738">
-            </div>
-            <div class="gallery__image js-modal-open">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/gallery4.jpg" alt="黄色い熱帯魚" decoding="async" loading="lazy" width="1160"
-                    height="738">
-            </div>
-            <div class="gallery__image js-modal-open">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/gallery5.jpg" alt="魚の群れ" decoding="async" loading="lazy" width="1160"
-                    height="738">
-            </div>
-            <div class="gallery__image js-modal-open">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/gallery6.jpg" alt="黄色い熱帯魚" decoding="async" loading="lazy" width="1492"
-                    height="984">
-            </div>
+        <?php
+                // SCFから画像データを取得（画像IDが取得される）
+                $gallery_images = SCF::get('gallery_images');
+
+                // 画像が登録されている場合のみループを実行
+                if (is_array($gallery_images) && !empty($gallery_images)) :
+                    foreach ($gallery_images as $image_data) :
+                        $image_id = !empty($image_data['image']) ? (int)$image_data['image'] : 0; // 画像IDを取得
+                        $alt_text = !empty($image_data['alt']) ? esc_attr($image_data['alt']) : ''; // 画像のalt属性
+
+                        // IDから画像URLを取得（サイズを指定）
+                        $image_url = ($image_id) ? wp_get_attachment_image_url($image_id, 'full') : '';
+
+                        // 画像がある場合のみ表示
+                        if ($image_url) :
+                ?>
+                <div class="gallery__image js-modal-open">
+                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo $alt_text; ?>" decoding="async" loading="lazy">
+                </div>
+                <?php
+                        endif;
+                    endforeach;
+                else:
+                ?>
+                <p>画像が登録されていません。</p>
+                <?php endif; ?>
+
             <!-- モーダル -->
             <div class="modal js-modal">
                 <div class="modal__image">
