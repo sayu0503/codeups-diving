@@ -103,9 +103,12 @@ input[type="radio"] {
 }
 
 input[type="checkbox"]:checked+.checkbox__text::after,
-input[type="checkbox"]:checked+.checkbox__consent--text::after {
+input[type="checkbox"]:checked+.checkbox__consent--text::after,
+input[type="checkbox"]:checked+.wpcf7-list-item-label::after
+{
   opacity: 1;
 }
+
 
 input[type="submit"],
 input[type="button"],

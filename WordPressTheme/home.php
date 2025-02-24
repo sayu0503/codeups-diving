@@ -39,8 +39,7 @@
                                 <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m.d'); ?>
                                 </time>
                                 <h3 class="blog-card__title"><?php the_title(); ?></h3>
-                                <p class="blog-card__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
+                                <?php echo wp_trim_words( get_the_excerpt(), 90, '...' ); ?>
                             </div>
                         </a>
                         <?php endwhile; ?>

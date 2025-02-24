@@ -226,12 +226,11 @@ $(function () {
 });
 
 
-//サイドバーのコーディオン
-$(function () {
-  $(".js-accordion-title.is-open").next().show();
-  $(".js-accordion-title").on("click", function () {
-    $(this).next().slideToggle(300);
-    $(this).toggleClass("is-open", 300);
+//サイドバーのアコーディオン
+$(document).ready(function() {
+  $(".js-accordion-title").click(function() {
+      $(this).toggleClass("is-open");
+      $(this).next(".sidebar__archive-months").slideToggle();
   });
 });
 
@@ -246,35 +245,24 @@ $(document).ready(function () {
   });
 });
 
-//コンタクトフォームのバリデーション
-$(document).ready(function () {
-  $(".page-contact__button").on("click", function (event) {
-    $(".page-contact__error-box").hide();
-    let isValid = true;
-    $(".js-form").find("input[required], textarea[required], select[required]").each(function () {
-      if ($(this).val().trim() === "") {
-        $(this).addClass("use-invalid");
-        isValid = false;
-      } else {
-        $(this).removeClass("use-invalid");
-      }
-    });
-    if ($(".page-contact__checkbox-group input[type='checkbox']:checked").length === 0) {
-      $(".page-contact__checkbox-group input[type='checkbox']").addClass("use-invalid");
-      $(".page-contact__checkbox-error").show();
-      isValid = false;
-    }
-    if (!isValid) {
-      $(".page-contact__error-box").show();
-      window.scrollTo(0, 0);
-      return false;
-    }
-    window.location.href = "page-thanks.html";
-  });
-  $(".page-contact__checkbox-group input[type='checkbox']").on("change", function () {
-    if ($(".page-contact__checkbox-group input[type='checkbox']:checked").length > 0) {
-      $(".page-contact__checkbox-group input[type='checkbox']").removeClass("use-invalid");
+//フォームのバリデーション
+jQuery(function ($) {
+  $('.wpcf7').on('wpcf7invalid wpcf7spam wpcf7failed', function (event) {
+    let errorMessage = $(this).find('.wpcf7-response-output');
+
+    if (errorMessage.length) {
+      $('html, body').animate({
+        scrollTop: errorMessage.offset().top - 150
+      }, 500);
     }
   });
 });
+//thanksページに遷移させる
+document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('wpcf7mailsent', function (event) {
+    window.location.href = '/thanks/';
+  }, false);
+});
+
+
 

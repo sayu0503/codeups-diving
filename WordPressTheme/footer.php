@@ -1,4 +1,5 @@
 <!-- Contact -->
+<?php if (!is_page('contact') && !is_404()) : ?>
 <section class="top-contact contact">
       <div class="contact__inner inner">
         <div class="contact__contents">
@@ -37,6 +38,7 @@
         </div>
       </div>
     </section>
+    <?php endif; ?>
   </main>
   <!--フッター-->
   <footer class="top-footer footer">

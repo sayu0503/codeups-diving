@@ -144,3 +144,71 @@ function my_acf_format_value($value, $post_id, $field) {
     return wpautop($value);
 }
 add_filter('acf/format_value/type=wysiwyg', 'my_acf_format_value', 10, 3);
+
+
+
+// Contact Form 7で自動挿入されるPタグ、brタグを削除
+add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
+function wpcf7_autop_return_false() {
+  return false;
+}
+
+function add_campaign_options_to_cf7($tag) {
+    if ($tag['name'] !== 'campaign') {
+        return $tag;
+    }
+
+    $args = array(
+        'post_type'      => 'campaign',
+        'posts_per_page' => 3,
+        'orderby'        => 'date',
+        'order'          => 'DESC'
+    );
+
+    $campaigns = get_posts($args);
+    $options = array('キャンペーン内容を選択');
+
+    if (!empty($campaigns)) {
+        foreach ($campaigns as $post) {
+            $options[] = $post->post_title;
+        }
+    } else {
+        $options[] = 'キャンペーンがありません';
+    }
+
+    $tag['raw_values'] = $options;
+    $tag['values'] = $options;
+
+    return $tag;
+}
+add_filter('wpcf7_form_tag', 'add_campaign_options_to_cf7', 10, 1);
+
+
+
+function getPostViews($postID) {
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if ($count == '') {
+      delete_post_meta($postID, $count_key);
+      add_post_meta($postID, $count_key, '0');
+      return '0 PV';
+      // return '0 View';
+    }
+    return $count.' PV';
+    // return $count.'Views';
+  }
+
+  function setPostViews($postID) {
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if ($count == '') {
+      $count = 0;
+      delete_post_meta($postID, $count_key);
+      add_post_meta($postID, $count_key, '0');
+    } else {
+      $count++;
+      update_post_meta($postID, $count_key, $count);
+    }
+  }
+
+  remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);

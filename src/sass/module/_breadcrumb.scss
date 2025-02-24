@@ -22,6 +22,13 @@
     content: '';
 }
 
+body.error404 .breadcrumb__text::after {
+    border-top: 1px solid $white;
+    border-right: 1px solid $white;
+}
+
+
+
 .breadcrumb__text {
     font-size: rem(14);
     font-weight: $regular;
@@ -30,6 +37,8 @@
     line-height: calc(20 / 14);
     letter-spacing: 0;
 }
+
+
 
 .breadcrumb__inner span,
 .breadcrumb__inner span a{
@@ -54,8 +63,10 @@
     content: '';
 }
 
-
-
-.breadcrumb__inner span a:hover {
-
+/* 404ページ専用のパンくずリストの文字色を白にする */
+body.error404 .breadcrumb__inner span,
+body.error404 .breadcrumb__inner span a {
+    color: $white;
 }
+
+

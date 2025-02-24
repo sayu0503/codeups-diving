@@ -1,11 +1,10 @@
 @use "global" as *;
 
-.checkbox {}
-
 /******************************************
   お問い合わせ項目
 *******************************************/
-.checkbox__text {
+.checkbox__text,
+.wpcf7-list-item-label {
    position: relative;
    font-size: rem(16);
    font-weight: $regular;
@@ -16,7 +15,8 @@
    padding-left: rem(22);
 }
 
-.checkbox__text::before {
+.checkbox__text::before,
+.wpcf7-list-item-label::before {
    content: "";
    position: absolute;
    top: 55%;
@@ -32,18 +32,39 @@
    }
 }
 
-.use-invalid+.checkbox__text::before {
+.use-invalid+.checkbox__text::before,
+.use-invalid .wpcf7-list-item-label::before {
    border-color: $red;
    background-color: rgba($color: $red, $alpha: 0.2);
    content: "";
 }
 
-.checked-valid+.checkbox__text::before {
+.checked-valid+.checkbox__text::before,
+.checked-valid .wpcf7-list-item-label::before {
    border-color: $green-accent;
    background-color: $white;
 }
 
-.checkbox__text::after {
+.checkbox__text::after,
+.wpcf7-list-item-label::after {
+   content: url(../images/common/contact-check.svg);
+   position: absolute;
+   top: 50%;
+   left: rem(2);
+   transform: translateY(-50%);
+   width: rem(9);
+   height: auto;
+   opacity: 0;
+   border: none;
+
+
+   @include mq(md) {
+      top: 46%;
+      left: rem(2);
+   }
+}
+
+.wpcf7-list-item-label::after {
    content: url(../images/common/contact-check.svg);
    position: absolute;
    top: 50%;
@@ -55,15 +76,16 @@
    border: none;
 
    @include mq(md) {
-      top: 46%;
-      left: rem(2);
+       top: 46%;
+       left: rem(2);
    }
 }
 
 /******************************************
   同意チェックボックス
 *******************************************/
-.checkbox__consent--text {
+.checkbox__consent--text,
+.wpcf7-form-control-wrap[data-name="checkbox-agree"] .wpcf7-list-item-label {
    font-size: rem(14);
    font-weight: $regular;
    font-family: $base-font-family;
@@ -81,7 +103,8 @@
    }
 }
 
-.checkbox__consent--text::before {
+.checkbox__consent--text::before,
+.wpcf7-form-control-wrap[data-name="checkbox-agree"] .wpcf7-list-item-label::before {
    content: "";
    position: absolute;
    top: 27%;
@@ -94,12 +117,13 @@
 
    @include mq(md) {
       margin-top: 2%;
-      top: 20%;
+      top: 0%;
       left: 0;
    }
 }
 
-.checkbox__consent--text::after {
+.checkbox__consent--text::after,
+.wpcf7-form-control-wrap[data-name="checkbox-agree"] .wpcf7-list-item-label::after {
    content: "";
    position: absolute;
    top: 13%;
@@ -116,3 +140,4 @@
       left: rem(8);
    }
 }
+
