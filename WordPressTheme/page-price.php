@@ -25,7 +25,7 @@
       <div class="page-price__inner inner">
         <div class="page-price__contents">
           <!-- ライセンス講習 -->
-          <div class="page-price__group">
+          <div class="page-price__group" id="page-price__group01">
             <h2 class="page-price__title">ライセンス講習</h2>
             <div class="page-price__items">
               <?php
@@ -44,7 +44,7 @@
             </div>
           </div>
           <!-- 体験ダイビング -->
-          <div class="page-price__group">
+          <div class="page-price__group" id="page-price__group02">
             <h2 class="page-price__title">体験ダイビング</h2>
             <div class="page-price__items">
               <?php
@@ -63,10 +63,10 @@
             </div>
           </div>
           <!-- ファンダイビング -->
-          <div class="page-price__group">
+          <div class="page-price__group" id="page-price__group03">
             <h2 class="page-price__title">ファンダイビング</h2>
             <div class="page-price__items">
-              <?php 
+              <?php
               $fundiving_menus = SCF::get('fundiving_menu');
               $fundiving_prices = SCF::get('fundiving_price');
 
@@ -86,7 +86,7 @@
           <div class="page-price__group">
             <h2 class="page-price__title">スペシャルダイビング</h2>
             <div class="page-price__items">
-              <?php 
+              <?php
               $specialdiving_menus = SCF::get('specialdiving_menu');
               $specialdiving_prices = SCF::get('specialdiving_price');
 

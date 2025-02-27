@@ -16,11 +16,19 @@
 <body id="top" <?php body_class(); ?>>
   <header class="top-header header" id="js-header">
     <div class="header__inner">
-      <h1 class="header__title">
-        <a href="<?php echo esc_url(home_url("/")) ?>" class="header__logo-link">
-          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo.png" decoding="async" alt="CodeUpsのロゴ" width="133" height="50">
-        </a>
-      </h1>
+    <?php if (is_front_page() || is_home()) : ?>
+  <h1 class="header__title">
+<?php else : ?>
+  <div class="header__title">
+<?php endif; ?>
+    <a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo-link">
+      <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo.png" decoding="async" alt="CodeUpsのロゴ" width="133" height="50">
+    </a>
+<?php if (is_front_page() || is_home()) : ?>
+  </h1>
+<?php else : ?>
+  </div>
+<?php endif; ?>
       <button type="button" class="header__drawer hamburger js-hamburger">
         <span></span>
         <span></span>
@@ -93,13 +101,13 @@
                       <li class="sp-nav__body">
                         <ul class="sp-nav__lists">
                           <li class="sp-nav__list">
-                            <a href="#">ライセンス取得</a>
+                          <a href="<?php echo esc_url(home_url('/campaign/#page-campaign-license_1')); ?>">ライセンス取得</a>
                           </li>
                           <li class="sp-nav__list">
-                            <a href="<?php echo esc_url(home_url('/campaign/#page-campaign__item02')); ?>">貸切体験ダイビング</a>
+                            <a href="<?php echo esc_url(home_url('/campaign/#page-campaign-diving_1')); ?>">貸切体験ダイビング</a>
                           </li>
                           <li class="sp-nav__list">
-                            <a href="<?php echo esc_url(home_url('/campaign/#page-campaign__item03')); ?>">ナイトダイビング</a>
+                            <a href="<?php echo esc_url(home_url('/campaign/#page-campaign-night_diving_1')); ?>">ナイトダイビング</a>
                           </li>
                         </ul>
                       </li>
@@ -118,13 +126,13 @@
                       <li class="sp-nav__body">
                         <ul class="sp-nav__lists">
                           <li class="sp-nav__list">
-                            <a href="page-information.html#tab__content01">ライセンス講習</a>
+                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>information#tab__content01">ライセンス講習</a>
                           </li>
                           <li class="sp-nav__list">
-                            <a href="page-information.html#tab__content02">体験ダイビング</a>
+                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>information#tab__content02">体験ダイビング</a>
                           </li>
                           <li class="sp-nav__list">
-                            <a href="page-information.html#tab__content03">ファンダイビング</a>
+                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>information#tab__content03">ファンダイビング</a>
                           </li>
                         </ul>
                       </li>
@@ -152,13 +160,13 @@
                       <li class="sp-nav__body">
                         <ul class="sp-nav__lists">
                           <li class="sp-nav__list">
-                            <a href="page-price.html#page-price__group01">ライセンス講習</a>
+                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>price#page-price__group01">ライセンス講習</a>
                           </li>
                           <li class="sp-nav__list">
-                            <a href="page-price.html#page-price__group02">体験ダイビング</a>
+                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>price#page-price__group02">体験ダイビング</a>
                           </li>
                           <li class="sp-nav__list">
-                            <a href="page-price.html#page-price__group03">ファンダイビング</a>
+                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>price#page-price__group03">ファンダイビング</a>
                           </li>
                         </ul>
                       </li>

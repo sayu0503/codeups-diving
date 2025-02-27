@@ -32,7 +32,7 @@
             </div>
             <div class="contact__column-text">ご予約・お問い合わせはコチラ</div>
             <div class="contact__column-btn">
-              <a href="page-contact.html" class="button slide"><span>Contact us</span></a>
+              <a href="<?php echo esc_url(home_url("/contact")) ?>" class="button slide"><span>Contact us</span></a>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
     <div class="fooer__inner inner">
       <div class="footer__wrapper">
         <div class="footer__container">
-          <a href="index.html" class="footer__logo-link">
+          <a href="<?php echo esc_url(home_url("/")) ?>" class="footer__logo-link">
             <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/footer-logo.svg" alt="CodeUps" decoding="async" loading="lazy">
           </a>
           <div class="footer__icon-list">
@@ -65,50 +65,50 @@
                   <div class="footer-nav__group">
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-campaign.html">キャンペーン</a>
+                        <a href="<?php echo esc_url(home_url("/campaign")) ?>">キャンペーン</a>
                       </li>
                       <li class="footer-nav__body">
                         <ul class="footer-nav__lists">
                           <li class="footer-nav__list">
-                            <a href="page-campaign.html#page-campaign__item01">ライセンス取得</a>
+                          <a href="<?php echo esc_url(home_url('/campaign/#page-campaign-license_1')); ?>">ライセンス取得</a>
                           </li>
                           <li class="footer-nav__list">
-                            <a href="page-campaign.html#page-campaign__item02">貸切体験ダイビング</a>
+                          <a href="<?php echo esc_url(home_url('/campaign/#page-campaign-diving_1')); ?>">貸切体験ダイビング</a>
                           </li>
                           <li class="footer-nav__list">
-                            <a href="page-campaign.html#page-campaign__item03">ナイトダイビング</a>
+                          <a href="<?php echo esc_url(home_url('/campaign/#page-campaign-night_diving_1')); ?>">ナイトダイビング</a>
                           </li>
                         </ul>
                       </li>
                     </ul>
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-about.html">私たちについて</a>
+                        <a href="<?php echo esc_url(home_url("/about-us")) ?>">私たちについて</a>
                       </li>
                     </ul>
                   </div>
                   <div class="footer-nav__group">
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-information.html">ダイビング情報</a>
+                        <a href="<?php echo esc_url(home_url("/information")) ?>">ダイビング情報</a>
                       </li>
                       <li class="footer-nav__body">
                         <ul class="footer-nav__lists">
                           <li class="footer-nav__list">
-                            <a href="page-information.html#tab__content01">ライセンス講習</a>
+                          <a href="<?php echo esc_url( home_url( '/' ) ); ?>information#tab__content01">ライセンス講習</a>
                           </li>
                           <li class="footer-nav__list">
-                            <a href="page-information.html#tab__content02">体験ダイビング</a>
+                          <a href="<?php echo esc_url( home_url( '/' ) ); ?>information#tab__content02">体験ダイビング</a>
                           </li>
                           <li class="footer-nav__list">
-                            <a href="page-information.html#tab__content03">ファンダイビング</a>
+                          <a href="<?php echo esc_url( home_url( '/' ) ); ?>information#tab__content03">ファンダイビング</a>
                           </li>
                         </ul>
                       </li>
                     </ul>
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-blog.html">ブログ</a>
+                        <a href="<?php echo esc_url(home_url("/blog")) ?>">ブログ</a>
                       </li>
                     </ul>
                   </div>
@@ -119,23 +119,23 @@
                   <div class="footer-nav__group">
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-voice.html">お客様の声</a>
+                        <a href="<?php echo esc_url(home_url("/voice")) ?>">お客様の声</a>
                       </li>
                     </ul>
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-price.html">料金一覧</a>
+                      <a href="<?php echo esc_url(home_url("/price")) ?>">料金一覧</a>
                       </li>
                       <li class="footer-nav__body">
                         <ul class="footer-nav__lists">
                           <li class="footer-nav__list">
-                            <a href="page-price.html#page-price__group01">ライセンス講習</a>
+                          <a href="<?php echo esc_url( home_url( '/' ) ); ?>price#page-price__group01">ライセンス講習</a>
                           </li>
                           <li class="footer-nav__list">
-                            <a href="page-price.html#page-price__group02">体験ダイビング</a>
+                          <a href="<?php echo esc_url( home_url( '/' ) ); ?>price#page-price__group02">体験ダイビング</a>
                           </li>
                           <li class="footer-nav__list">
-                            <a href="page-price.html#page-price__group03">ファンダイビング</a>
+                          <a href="<?php echo esc_url( home_url( '/' ) ); ?>price#page-price__group03">ファンダイビング</a>
                           </li>
                         </ul>
                       </li>
@@ -144,27 +144,27 @@
                   <div class="footer-nav__group">
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-faq.html">よくある質問</a>
+                        <a href="<?php echo esc_url(home_url("/faq")) ?>">よくある質問</a>
                       </li>
                     </ul>
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-privacypolicy.html">プライバシー<br class="u-mobile">ポリシー</a>
+                        <a href="<?php echo esc_url(home_url("/privacypolicy")) ?>">プライバシー<br class="u-mobile">ポリシー</a>
                       </li>
                     </ul>
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-terms.html">利用規約</a>
+                        <a href="<?php echo esc_url(home_url("/terms-of-service")) ?>">利用規約</a>
                       </li>
                     </ul>
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-sitemap.html">サイトマップ</a>
+                        <a href="<?php echo esc_url(home_url("/sitemap")) ?>">サイトマップ</a>
                       </li>
                     </ul>
                     <ul class="footer-nav__wrapper">
                       <li class="footer-nav__title">
-                        <a href="page-contact.html">お問い合わせ</a>
+                        <a href="<?php echo esc_url(home_url("/contact")) ?>">お問い合わせ</a>
                       </li>
                     </ul>
                   </div>

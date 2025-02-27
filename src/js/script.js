@@ -252,7 +252,7 @@ jQuery(function ($) {
 
     if (errorMessage.length) {
       $('html, body').animate({
-        scrollTop: errorMessage.offset().top - 150
+        scrollTop: errorMessage.offset().top - 100
       }, 500);
     }
   });
@@ -264,5 +264,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }, false);
 });
 
+//アンカーリンク
+jQuery(document).ready(function ($) {
+  const headerHeight = $("header").outerHeight();
 
+  if (window.location.hash) {
+      setTimeout(function () {
+          const target = $(window.location.hash);
+          if (target.length) {
+              const targetPosition = target.offset().top - headerHeight - extraMargin;
 
+              $("html, body").animate({ scrollTop: targetPosition }, 800, "swing");
+          }
+      }, 300);
+  }
+});

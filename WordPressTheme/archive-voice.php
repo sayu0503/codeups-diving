@@ -24,7 +24,7 @@
       <div class="page-voice__inner inner">
         <div class="page-voice__category category">
           <div class="category__items">
-            
+
           <?php
     // 「ALL」タブ（カスタム投稿タイプのアーカイブページ）
     $all_class = is_post_type_archive('voice') ? 'is-active' : '';

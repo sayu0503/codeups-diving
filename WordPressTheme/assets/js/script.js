@@ -262,7 +262,7 @@ jQuery(function ($) {
     var errorMessage = $(this).find('.wpcf7-response-output');
     if (errorMessage.length) {
       $('html, body').animate({
-        scrollTop: errorMessage.offset().top - 150
+        scrollTop: errorMessage.offset().top - 100
       }, 500);
     }
   });
@@ -272,4 +272,20 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('wpcf7mailsent', function (event) {
     window.location.href = '/thanks/';
   }, false);
+});
+
+//アンカーリンク
+jQuery(document).ready(function ($) {
+  var headerHeight = $("header").outerHeight();
+  if (window.location.hash) {
+    setTimeout(function () {
+      var target = $(window.location.hash);
+      if (target.length) {
+        var targetPosition = target.offset().top - headerHeight - extraMargin;
+        $("html, body").animate({
+          scrollTop: targetPosition
+        }, 800, "swing");
+      }
+    }, 300);
+  }
 });

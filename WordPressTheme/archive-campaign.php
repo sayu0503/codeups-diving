@@ -26,7 +26,7 @@
       <div class="page-campaign__inner inner">
         <div class="page-campaign__category category">
           <div class="category__items">
-            
+
           <?php
     // 「ALL」タブ（カスタム投稿タイプのアーカイブページ）
     $all_class = is_post_type_archive('campaign') ? 'is-active' : '';
@@ -60,11 +60,14 @@
     endif; ?>
           </div>
         </div>
-        
+
         <div class="page-campaign__items">
                     <?php if ( have_posts() ) : ?>
                 <?php while ( have_posts() ) : the_post(); ?>
-                <div class="page-campaign__item" id="page-campaign__item01">
+                <?php
+                $post_slug = get_post_field('post_name', get_the_ID()); // 投稿のスラッグを取得
+            ?>
+                <div class="page-campaign__item" id="page-campaign-<?php echo esc_attr($post_slug); ?>">
                         <div class="campaign-card">
                         <figure class="campaign-card__img">
                                                 <?php if ( has_post_thumbnail() ) : ?>
