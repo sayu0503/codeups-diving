@@ -81,6 +81,13 @@
    }
 }
 
+[data-name="checkbox-127"] {
+   margin-top: rem(15);
+   @include mq(md){
+       margin-top: rem(0);
+   }
+}
+
 /******************************************
   同意チェックボックス
 *******************************************/
@@ -116,7 +123,7 @@
    background: $white;
 
    @include mq(md) {
-      margin-top: 2%;
+      margin-top: 3%;
       top: 0%;
       left: 0;
    }

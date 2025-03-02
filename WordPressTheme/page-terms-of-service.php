@@ -21,7 +21,7 @@
 
 
       <!-- 下層利用規約-->
-      <div class="layout-privacy page-terms">
+      <div class="layout-terms page-terms">
         <div class="page-terms__inner inner">
           <div class="page-terms__content">
             <h2 class="page-terms__heading"><?php the_title(); ?></h2>

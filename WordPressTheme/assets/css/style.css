@@ -176,7 +176,7 @@ a {
 }
 
 .layout-blog {
-	margin-top: 3.25rem;
+	margin-top: 2.8125rem;
 }
 
 .layout-campaign {
@@ -231,6 +231,10 @@ a {
 }
 
 .layout-sitemap {
+	margin-top: 3.25rem;
+}
+
+.layout-terms {
 	margin-top: 3.25rem;
 }
 
@@ -1068,6 +1072,10 @@ body.error404 .breadcrumb__inner span a {
 	top: 50%;
 	transform: translateY(-50%);
 	width: 0.5625rem;
+}
+
+[data-name=checkbox-127] {
+	margin-top: 0.9375rem;
 }
 
 /******************************************
@@ -1950,7 +1958,6 @@ body.error404 {
 	display: flex;
 	flex-direction: column;
 	gap: 0.25rem;
-	margin-top: 0.8125rem;
 }
 
 span.wpcf7-list-item {
@@ -1964,19 +1971,19 @@ span.wpcf7-list-item {
 }
 
 .page-contact__button-block {
-	margin-top: 2.1875rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2.5rem;
 }
 
 .page-contact__button {
-	margin-top: 1.5rem;
+	display: flex;
+	justify-content: center;
 	width: 100%;
 }
 
 .page-contact__error-box {
-	margin-left: auto;
-	margin-right: auto;
 	max-width: 21.5625rem;
-	padding-bottom: 2.5rem;
 	text-align: center;
 }
 
@@ -2010,9 +2017,19 @@ span.wpcf7-list-item {
 	font-size: 0.875rem;
 	font-weight: 400;
 	line-height: 1.4285714286;
-	padding-left: 1em;
+	padding-bottom: 2.5rem;
 	text-align: left;
 	text-indent: -1em;
+}
+
+.wpcf7 form .wpcf7-response-output {
+	margin: 0;
+	padding-left: 4.375rem;
+	padding-right: 4.0625rem;
+}
+
+.wpcf7-not-valid-tip {
+	display: none;
 }
 
 .page-faq {
@@ -3599,7 +3616,7 @@ html {
 }
 
 .layout-page-contact {
-	margin-top: 7.125rem;
+	margin-top: 8.4375rem;
 }
 
 .layout-price {
@@ -3607,7 +3624,7 @@ html {
 }
 
 .layout-privacy {
-	margin-top: 9.4375rem;
+	margin-top: 10.625rem;
 }
 
 .layout-single-blog {
@@ -3615,6 +3632,10 @@ html {
 }
 
 .layout-sitemap {
+	margin-top: 9.375rem;
+}
+
+.layout-terms {
 	margin-top: 9.375rem;
 }
 
@@ -3824,11 +3845,12 @@ html {
 }
 
 .blog__contents {
-	margin-top: 5.125rem;
+	margin-top: 5.625rem;
 }
 
 .blog-cards {
 	grid-template-columns: repeat(3, 1fr);
+	row-gap: 5rem;
 }
 
 .blog-cards--layout {
@@ -3902,7 +3924,7 @@ html {
 }
 
 .campaign__container {
-	margin-top: 2.5rem;
+	margin-top: 2.875rem;
 }
 
 .campaign__btn {
@@ -3942,6 +3964,10 @@ html {
 	top: 46%;
 }
 
+[data-name=checkbox-127] {
+	margin-top: 0rem;
+}
+
 .checkbox__consent--text,
 .wpcf7-form-control-wrap[data-name=checkbox-agree] .wpcf7-list-item-label {
 	max-width: none;
@@ -3951,7 +3977,7 @@ html {
 .checkbox__consent--text::before,
 .wpcf7-form-control-wrap[data-name=checkbox-agree] .wpcf7-list-item-label::before {
 	left: 0;
-	margin-top: 2%;
+	margin-top: 3%;
 	top: 0%;
 }
 
@@ -4356,11 +4382,6 @@ html {
 	margin-top: 0;
 }
 
-.page-contact__checkbox-group,
-.wpcf7-form-control.wpcf7-checkbox {
-	margin-top: 0;
-}
-
 .page-contact__button-block {
 	margin-top: 5rem;
 	padding-left: 10.1875rem;
@@ -4368,18 +4389,20 @@ html {
 }
 
 .page-contact__button {
-	margin-left: 4.375rem;
-	margin-top: 2.5rem;
+	margin-top: 1.25rem;
 }
 
 .page-contact__error-box {
 	max-width: 100%;
-	padding-bottom: 0;
 }
 
 .wpcf7 form.invalid .wpcf7-response-output {
-	margin-top: 2.1875rem;
-	padding-left: 1.5rem;
+	margin-top: 0rem;
+	padding-bottom: 3.125rem;
+}
+
+.wpcf7 form .wpcf7-response-output {
+	padding-left: 5.625rem;
 }
 
 .page-faq::before {

@@ -139,11 +139,8 @@ function change_posts_per_page($query) {
         $query->set('posts_per_page', 6);
     }
 }
+add_action('pre_get_posts', 'change_posts_per_page');
 
-function my_acf_format_value($value, $post_id, $field) {
-    return wpautop($value);
-}
-add_filter('acf/format_value/type=wysiwyg', 'my_acf_format_value', 10, 3);
 
 
 
@@ -212,3 +209,4 @@ function getPostViews($postID) {
   }
 
   remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+

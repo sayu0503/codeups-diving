@@ -1,6 +1,6 @@
 <!-- Contact -->
-<?php if (!is_page('contact') && !is_404()) : ?>
-<section class="top-contact contact">
+<?php if (!is_page(array('contact', 'thanks')) && !is_404()) : ?>
+  <section class="<?php echo is_front_page() ? 'top-contact contact' : 'layout-contact contact'; ?>">
       <div class="contact__inner inner">
         <div class="contact__contents">
           <div class="contact__info">
@@ -41,7 +41,18 @@
     <?php endif; ?>
   </main>
   <!--フッター-->
-  <footer class="top-footer footer">
+  <footer class="<?php
+    if (is_404()) {
+        echo 'page-404-footer footer';
+    } elseif (is_page('contact')) {
+        echo 'contact-footer footer';
+    } elseif (is_page('thanks')) {
+        echo 'thanks-footer footer';
+    } else {
+        echo 'top-footer footer';
+    }
+?>">
+
     <div class="fooer__inner inner">
       <div class="footer__wrapper">
         <div class="footer__container">

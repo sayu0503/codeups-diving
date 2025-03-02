@@ -194,13 +194,11 @@
 
 .page-contact__checkbox-group,
 .wpcf7-form-control.wpcf7-checkbox {
-    margin-top: rem(13);
     display: flex;
     flex-direction: column;
     gap: rem(4);
 
     @include mq(md) {
-        margin-top: 0;
     }
 }
 
@@ -215,7 +213,8 @@ span.wpcf7-list-item {
   }
 
 .page-contact__button-block {
-    margin-top: rem(35);
+    margin-top: rem(40);
+    margin-inline: auto;
 
     @include mq(md) {
         margin-top: rem(80);
@@ -225,24 +224,21 @@ span.wpcf7-list-item {
 
 .page-contact__button {
     width: 100%;
-    margin-top: rem(24);
+    display: flex;
+    justify-content: center;
 
     @include mq(md) {
-        margin-top: rem(40);
-        margin-left: rem(70);
+        margin-top: rem(20);
     }
 }
 
 
  .page-contact__error-box {
      max-width: rem(345);
-     padding-bottom: rem(40);
      text-align: center;
-     margin-inline: auto;
 
      @include mq(md) {
          max-width: 100%;
-         padding-bottom: 0;
      }
  }
 
@@ -275,10 +271,24 @@ span.wpcf7-list-item {
      display: inline-block;
      text-align: left;
      text-indent: -1em;
-     padding-left: 1em;
+     padding-bottom: rem(40);
 
      @include mq(md) {
-         margin-top: rem(35);
-         padding-left: rem(24);
+         margin-top: rem(0);
+         padding-bottom: rem(50);
      }
+}
+
+.wpcf7 form .wpcf7-response-output {
+    margin: 0;
+    padding-left: rem(70);
+    padding-right: rem(65);
+    @include mq(md){
+      padding-left: rem(90);
+    }
+
+}
+
+.wpcf7-not-valid-tip {
+    display: none;
 }

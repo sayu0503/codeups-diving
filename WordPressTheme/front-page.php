@@ -274,7 +274,7 @@
                     </div>
                   </div>
                 </div>
-                <p class="voice-card__text"><?php echo wp_trim_words(get_the_content(), 300, '...'); ?></p>
+                <p class="voice-card__text"><?php echo wp_trim_words(get_the_content(), 200, '...'); ?></p>
               </div>
             </div>
           <?php endwhile; ?>
