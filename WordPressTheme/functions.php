@@ -107,12 +107,12 @@ function Change_menulabel() {
     add_action( 'admin_menu', 'Change_menulabel' );
 
     function my_setup() {
-        add_theme_support( 'post-thumbnails' ); /* アイキャッチ */
-        add_theme_support( 'automatic-feed-links' ); /* RSSフィード */
-        add_theme_support( 'title-tag' ); /* タイトルタグ自動生成 */
+        add_theme_support( 'post-thumbnails' );
+        add_theme_support( 'automatic-feed-links' );
+        add_theme_support( 'title-tag' );
         add_theme_support(
             'html5',
-            array( /* HTML5のタグで出力 */
+            array(
                 'search-form',
                 'comment-form',
                 'comment-list',
@@ -123,28 +123,21 @@ function Change_menulabel() {
     }
     add_action( 'after_setup_theme', 'my_setup' );
 
-// アーカイブの表示件数変更
 function change_posts_per_page($query) {
     if (is_admin() || !$query->is_main_query()) {
         return;
     }
 
-    // campaign のアーカイブページは 4 件表示
     if ($query->is_post_type_archive('campaign')) {
         $query->set('posts_per_page', 4);
     }
 
-    // voice のアーカイブページは 6 件表示
     if ($query->is_post_type_archive('voice')) {
         $query->set('posts_per_page', 6);
     }
 }
 add_action('pre_get_posts', 'change_posts_per_page');
 
-
-
-
-// Contact Form 7で自動挿入されるPタグ、brタグを削除
 add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
 function wpcf7_autop_return_false() {
   return false;
@@ -189,10 +182,8 @@ function getPostViews($postID) {
       delete_post_meta($postID, $count_key);
       add_post_meta($postID, $count_key, '0');
       return '0 PV';
-      // return '0 View';
     }
     return $count.' PV';
-    // return $count.'Views';
   }
 
   function setPostViews($postID) {

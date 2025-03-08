@@ -35,6 +35,10 @@
     }
 }
 
+body#top.blog.logged-in.admin-bar.customize-support::after {
+    display: none !important;
+  }
+
 .blog__contents {
     margin-top: rem(33);
     padding-inline: rem(5);

@@ -23,15 +23,13 @@
 <div class="layout-faq page-faq">
   <div class="page-faq__inner inner">
     <div class="page-faq__content accordion__items">
-    <?php 
-      // SCFからFAQデータを取得
+    <?php
       $faq_list = SCF::get('faq_list');
 
-      // FAQが登録されている場合のみループを実行
       if (!empty($faq_list)) :
         foreach ($faq_list as $faq) :
-          $question = esc_html($faq['question']); // 質問
-          $answer = nl2br(esc_html($faq['answer'])); // 答え（改行を有効にする）
+          $question = esc_html($faq['question']);
+          $answer = nl2br(esc_html($faq['answer']));
       ?>
       <dl class="accordion__item">
         <dt class="accordion__header"><?php echo $question; ?></dt>

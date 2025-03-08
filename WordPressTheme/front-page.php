@@ -187,10 +187,10 @@
       <div class="blog-cards">
         <?php
         $args = array(
-          'post_type'      => 'post', // 投稿タイプを 'post' に設定（通常のブログ記事）
-          'posts_per_page' => 3, // 最新3件のみ取得
-          'orderby'        => 'date', // 日付順
-          'order'          => 'DESC', // 新しい順
+          'post_type'      => 'post',
+          'posts_per_page' => 3,
+          'orderby'        => 'date',
+          'order'          => 'DESC',
         );
         $blog_query = new WP_Query($args);
         ?>
@@ -238,10 +238,10 @@
       <div class="voice-cards">
         <?php
         $args = array(
-          'post_type'      => 'voice', // カスタム投稿タイプ 'voice' を取得
-          'posts_per_page' => 2, // 最新2件のみ表示
-          'orderby'        => 'date', // 日付順
-          'order'          => 'DESC', // 新しい順
+          'post_type'      => 'voice',
+          'posts_per_page' => 2,
+          'orderby'        => 'date',
+          'order'          => 'DESC',
         );
         $voice_query = new WP_Query($args);
         ?>
@@ -301,10 +301,10 @@
           </div>
         </div>
         <?php
-// 料金ページの固定ページIDを指定（「固定ページ一覧」からIDを確認）
-$price_page_id = 11; // ← ここに料金ページの固定ページIDを設定
 
-// 各カテゴリーのメニューと価格を取得
+$price_page_id = 11;
+
+
 $license_menus = SCF::get('license_menu', $price_page_id);
 $license_prices = SCF::get('license_price', $price_page_id);
 

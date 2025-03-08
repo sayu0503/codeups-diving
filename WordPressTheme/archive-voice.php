@@ -26,7 +26,6 @@
           <div class="category__items">
 
           <?php
-    // 「ALL」タブ（カスタム投稿タイプのアーカイブページ）
     $all_class = is_post_type_archive('voice') ? 'is-active' : '';
     ?>
     <a href="<?php echo esc_url(get_post_type_archive_link('voice')); ?>" class="category__item <?php echo esc_attr($all_class); ?>">
@@ -34,21 +33,18 @@
     </a>
 
     <?php
-    // タクソノミー "campaign_category" のターム一覧を取得
     $terms = get_terms([
-        'taxonomy'   => 'voice_category', // タクソノミーのスラッグ
-        'hide_empty' => true, // 投稿がないタームは非表示
-        'orderby'    => 'name', // 名前順で並び替え
-        'order'      => 'ASC', // 昇順
+        'taxonomy'   => 'voice_category',
+        'hide_empty' => true,
+        'orderby'    => 'name',
+        'order'      => 'ASC',
     ]);
 
-    // タームごとのタブリンクを生成
     if (!empty($terms) && !is_wp_error($terms)) :
         foreach ($terms as $term) :
-            // タームのアーカイブページURLを取得
+
             $term_link = get_term_link($term);
 
-            // 現在のタームページなら "is-active" クラスを追加
             $term_class = (is_tax('voice_category', $term->term_id)) ? 'is-active' : '';
             ?>
             <a href="<?php echo esc_url($term_link); ?>" class="category__item <?php echo esc_attr($term_class); ?>">
@@ -70,10 +66,9 @@
                       <div class="voice-card__info"><?php the_field('age'); ?> (<?php the_field('gender'); ?>)</div>
                       <div class="voice-card__category">
                       <?php
-                            // カスタムタクソノミー "genre" のタームを取得
-                            $terms = get_the_terms(get_the_ID(), 'voice_category'); // スラッグを正しく設定
 
-                            // タクソノミーが設定されていれば、最初のターム名を取得
+                            $terms = get_the_terms(get_the_ID(), 'voice_category');
+
                             $term_name = !empty($terms) && !is_wp_error($terms) ? $terms[0]->name : '未分類';
                             ?>
                         <div class="voice-card__label"><?php echo esc_html($term_name); ?></div>

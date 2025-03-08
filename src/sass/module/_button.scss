@@ -255,9 +255,13 @@
 }
 
 @media (any-hover: hover) {
-    .button__submit:hover {
-        color: $green-accent;
-    }
+    .button__submit:hover,
+.button__submit:hover .custom-submit,
+.button__submit:hover .button-arrow::after {
+    border-right: rem(1) solid $green-accent;
+    border-bottom: rem(1) solid $green-accent;
+    color: $green-accent;
+}
 
     .button__submit:hover::after {
         transform: scale(1, 1);
@@ -266,10 +270,5 @@
     .button__submit:hover .button-arrow::after {
         border-right: rem(1) solid $green-accent;
         border-bottom: rem(1) solid $green-accent;
-    }
-
-    .button__submit:hover .custom-submit {
-        color: $green-accent;
-        border-color: $green-accent;
     }
 }

@@ -516,6 +516,10 @@ a {
 	position: relative;
 }
 
+body#top.blog.logged-in.admin-bar.customize-support::after {
+	display: none !important;
+}
+
 .blog__contents {
 	margin-top: 2.0625rem;
 	padding-left: 0.3125rem;
@@ -959,7 +963,7 @@ body.error404 .breadcrumb__inner span a {
 	text-align: left;
 }
 
-.camping__inner {
+.campaign__inner {
 	position: relative;
 }
 
@@ -2693,8 +2697,9 @@ span.wpcf7-list-item {
 }
 
 .sidebar__article-image {
+	flex-shrink: 0;
 	overflow: hidden;
-	width: 46%;
+	width: 7.5625rem;
 }
 
 .sidebar__article-image img {
@@ -3445,7 +3450,11 @@ span.wpcf7-list-item {
 	transform: scale(1, 1);
 }
 
-.button__submit:hover {
+.button__submit:hover,
+.button__submit:hover .custom-submit,
+.button__submit:hover .button-arrow::after {
+	border-bottom: 0.0625rem solid #408F95;
+	border-right: 0.0625rem solid #408F95;
 	color: #408F95;
 }
 
@@ -3456,11 +3465,6 @@ span.wpcf7-list-item {
 .button__submit:hover .button-arrow::after {
 	border-bottom: 0.0625rem solid #408F95;
 	border-right: 0.0625rem solid #408F95;
-}
-
-.button__submit:hover .custom-submit {
-	border-color: #408F95;
-	color: #408F95;
 }
 
 .category__item-text:hover {

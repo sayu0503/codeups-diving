@@ -59,19 +59,15 @@
         </div>
         <div class="gallery__contents">
         <?php
-                // SCFから画像データを取得（画像IDが取得される）
                 $gallery_images = SCF::get('gallery_images');
 
-                // 画像が登録されている場合のみループを実行
                 if (is_array($gallery_images) && !empty($gallery_images)) :
                     foreach ($gallery_images as $image_data) :
-                        $image_id = !empty($image_data['image']) ? (int)$image_data['image'] : 0; // 画像IDを取得
-                        $alt_text = !empty($image_data['alt']) ? esc_attr($image_data['alt']) : ''; // 画像のalt属性
+                        $image_id = !empty($image_data['image']) ? (int)$image_data['image'] : 0;
+                        $alt_text = !empty($image_data['alt']) ? esc_attr($image_data['alt']) : '';
 
-                        // IDから画像URLを取得（サイズを指定）
                         $image_url = ($image_id) ? wp_get_attachment_image_url($image_id, 'full') : '';
 
-                        // 画像がある場合のみ表示
                         if ($image_url) :
                 ?>
                 <div class="gallery__image js-modal-open">

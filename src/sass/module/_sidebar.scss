@@ -59,7 +59,8 @@
 
 .sidebar__article-image {
     overflow: hidden;
-    width: 46%;
+    flex-shrink: 0;
+    width: rem(121);
 }
 
 .sidebar__article-image img {

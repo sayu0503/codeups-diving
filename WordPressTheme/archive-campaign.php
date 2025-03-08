@@ -28,7 +28,6 @@
           <div class="category__items">
 
           <?php
-    // 「ALL」タブ（カスタム投稿タイプのアーカイブページ）
     $all_class = is_post_type_archive('campaign') ? 'is-active' : '';
     ?>
     <a href="<?php echo esc_url(get_post_type_archive_link('campaign')); ?>" class="category__item <?php echo esc_attr($all_class); ?>">
@@ -36,21 +35,17 @@
     </a>
 
     <?php
-    // タクソノミー "campaign_category" のターム一覧を取得
     $terms = get_terms([
-        'taxonomy'   => 'campaign_category', // タクソノミーのスラッグ
-        'hide_empty' => true, // 投稿がないタームは非表示
-        'orderby'    => 'name', // 名前順で並び替え
-        'order'      => 'ASC', // 昇順
+        'taxonomy'   => 'campaign_category',
+        'hide_empty' => true,
+        'orderby'    => 'name',
+        'order'      => 'ASC',
     ]);
 
-    // タームごとのタブリンクを生成
     if (!empty($terms) && !is_wp_error($terms)) :
         foreach ($terms as $term) :
-            // タームのアーカイブページURLを取得
             $term_link = get_term_link($term);
 
-            // 現在のタームページなら "is-active" クラスを追加
             $term_class = (is_tax('campaign_category', $term->term_id)) ? 'is-active' : '';
             ?>
             <a href="<?php echo esc_url($term_link); ?>" class="category__item <?php echo esc_attr($term_class); ?>">
@@ -65,7 +60,7 @@
                     <?php if ( have_posts() ) : ?>
                 <?php while ( have_posts() ) : the_post(); ?>
                 <?php
-                $post_slug = get_post_field('post_name', get_the_ID()); // 投稿のスラッグを取得
+                $post_slug = get_post_field('post_name', get_the_ID());
             ?>
                 <div class="page-campaign__item" id="page-campaign-<?php echo esc_attr($post_slug); ?>">
                         <div class="campaign-card">
@@ -79,10 +74,8 @@
                         <div class="campaign-card__body campaign-card__body--layout">
                             <div class="campaign-card__category">
                             <?php
-                            // カスタムタクソノミー "genre" のタームを取得
-                            $terms = get_the_terms(get_the_ID(), 'campaign_category'); // スラッグを正しく設定
+                            $terms = get_the_terms(get_the_ID(), 'campaign_category');
 
-                            // タクソノミーが設定されていれば、最初のターム名を取得
                             $term_name = !empty($terms) && !is_wp_error($terms) ? $terms[0]->name : '未分類';
                             ?>
                             <div class="campaign-card__label"><?php echo esc_html($term_name); ?></div>
@@ -103,7 +96,7 @@
                                 <p class="campaign-card__comment">ご予約・お問い合わせはコチラ</p>
                                 </div>
                                 <div class="campaign-card__apply">
-                                <a href="page-contact.html" class="button slide"><span>Contact&nbsp;us</span></a>
+                                <a href="<?php echo esc_url(home_url("/contact")) ?>" class="button slide"><span>Contact&nbsp;us</span></a>
                                 </div>
                             </div>
                             </div>
