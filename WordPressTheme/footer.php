@@ -60,10 +60,10 @@
             <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/footer-logo.svg" alt="CodeUps" decoding="async" loading="lazy">
           </a>
           <div class="footer__icon-list">
-            <a href="#" class="footer__icon-item">
+            <a href="https://www.facebook.com/?locale=ja_JP" class="footer__icon-item" target="_blank">
               <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/FacebookLogo.svg" alt="facebookのロゴ" decoding="async" loading="lazy">
             </a>
-            <a href="#" class="footer__icon-item">
+            <a href="https://www.instagram.com/" class="footer__icon-item" target="_blank">
               <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/InstagramLogo.svg" alt="instagramのロゴ" decoding="async" loading="lazy">
             </a>
           </div>

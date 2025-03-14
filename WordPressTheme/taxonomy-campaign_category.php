@@ -99,7 +99,7 @@
                                 <p class="campaign-card__comment">ご予約・お問い合わせはコチラ</p>
                                 </div>
                                 <div class="campaign-card__apply">
-                                <a href="page-contact.html" class="button slide"><span>Contact&nbsp;us</span></a>
+                                <a href="<?php echo esc_url(home_url('/contact/'))?>" class="button slide"><span>Contact&nbsp;us</span></a>
                                 </div>
                             </div>
                             </div>

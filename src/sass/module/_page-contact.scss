@@ -234,12 +234,7 @@ span.wpcf7-list-item {
 
 
  .page-contact__error-box {
-     max-width: rem(345);
      text-align: center;
-
-     @include mq(md) {
-         max-width: 100%;
-     }
  }
 
 .wpcf7-spinner {
@@ -289,3 +284,12 @@ span.wpcf7-list-item {
 
 }
 
+.wpcf7-not-valid-tip {
+    margin-top: rem(3);
+}
+
+
+.wpcf7 form .wpcf7-response-output {
+    border: none;
+    padding-bottom: rem(10);
+}

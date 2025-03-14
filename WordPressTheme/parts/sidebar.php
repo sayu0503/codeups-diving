@@ -1,4 +1,4 @@
-<div class="page-blog__sidebar sidebar">
+<aside class="page-blog__sidebar sidebar">
                     <div class="sidebar__items">
                         <div class="sidebar__item">
                             <h2 class="sidebar__title">人気記事</h2>
@@ -187,5 +187,4 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </aside>
