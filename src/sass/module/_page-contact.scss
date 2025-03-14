@@ -286,10 +286,21 @@ span.wpcf7-list-item {
 
 .wpcf7-not-valid-tip {
     margin-top: rem(3);
+    font-size: rem(14);
+    font-weight: $regular;
+    font-family: $base-font-family;
+    padding-bottom: rem(40);
 }
 
 
 .wpcf7 form .wpcf7-response-output {
     border: none;
-    padding-bottom: rem(10);
+    font-size: rem(14);
+    font-weight: $regular;
+    font-family: $base-font-family;
+    padding-bottom: rem(40);
+    @include mq(md) {
+        margin-top: rem(0);
+        padding-bottom: rem(50);
+    }
 }

@@ -2032,12 +2032,19 @@ span.wpcf7-list-item {
 }
 
 .wpcf7-not-valid-tip {
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 0.875rem;
+	font-weight: 400;
 	margin-top: 0.1875rem;
+	padding-bottom: 2.5rem;
 }
 
 .wpcf7 form .wpcf7-response-output {
 	border: none;
-	padding-bottom: 0.625rem;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 0.875rem;
+	font-weight: 400;
+	padding-bottom: 2.5rem;
 }
 
 .page-faq {
@@ -4407,6 +4414,11 @@ html {
 
 .wpcf7 form .wpcf7-response-output {
 	padding-left: 5.625rem;
+}
+
+.wpcf7 form .wpcf7-response-output {
+	margin-top: 0rem;
+	padding-bottom: 3.125rem;
 }
 
 .page-faq::before {
