@@ -55,8 +55,6 @@
           $args = array(
             'post_type'      => 'campaign',
             'posts_per_page' => 4,
-            'orderby'        => 'date',
-            'order'          => 'DESC',
           );
           $campaign_query = new WP_Query($args);
           ?>
