@@ -54,7 +54,9 @@
                 </div>
 
                 <!-- サイドバー -->
-                <?php get_template_part('parts/sidebar')?>
+                 <div class="page-blog__sidebar">
+                     <?php get_sidebar('parts'); ?>
+                </div>
             </div>
         </div>
     </section>

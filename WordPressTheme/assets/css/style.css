@@ -888,6 +888,7 @@ body.error404 .breadcrumb__inner span a {
 .campaign-card__price {
 	align-items: baseline;
 	display: flex;
+	gap: 1rem;
 	justify-content: center;
 	margin-top: 0.5rem;
 }
@@ -916,7 +917,6 @@ body.error404 .breadcrumb__inner span a {
 	font-size: 2rem;
 	font-weight: 700;
 	line-height: 1;
-	margin-left: 1rem;
 }
 
 .campaign-card__content {
@@ -3915,13 +3915,16 @@ html {
 	margin-top: 1.4375rem;
 }
 
+.campaign-card__price {
+	gap: 2.75rem;
+}
+
 .campaign-card__first-price {
 	font-size: 1.5rem;
 }
 
 .campaign-card__second-price {
 	font-size: 2.5rem;
-	margin-left: 1.5rem;
 }
 
 .campaign-card__meta {
@@ -3932,10 +3935,6 @@ html {
 .campaign-card__comment {
 	margin-top: 0.5rem;
 	text-indent: 0;
-}
-
-.campaign-card__second-price--layout {
-	margin-left: 2.5rem;
 }
 
 .campaign__container {

@@ -94,8 +94,8 @@
                                 <p class="campaign-card__text-item">
                                 <?php the_content(); ?>
                                 <div class="campaign-card__meta">
-                                <time class="campaign-card__date" datetime="2023-06-01"><?php the_field('discount_start_date'); ?></time><span>-</span><time
-                                    class="campaign-card__date" datetime="2023-09-30"><?php the_field('discount_end_date'); ?></time>
+                                <time class="campaign-card__date"><?php the_field('discount_start_date'); ?></time><span>-</span><time
+                                    class="campaign-card__date"><?php the_field('discount_end_date'); ?></time>
                                 <p class="campaign-card__comment">ご予約・お問い合わせはコチラ</p>
                                 </div>
                                 <div class="campaign-card__apply">

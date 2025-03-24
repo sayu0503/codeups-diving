@@ -83,16 +83,41 @@
                             <div class="campaign-card__title campaign__title--size"><?php the_title(); ?></div>
                             <div class="campaign-card__wrap">
                             <div class="campaign-card__text campaign-card__text--layout">全部コミコミ(お一人様)</div>
-                            <div class="campaign-card__price">
-                                <p class="campaign-card__first-price"><?php the_field('first_price'); ?></p>
-                                <p class="campaign-card__second-price campaign-card__second-price--layout"><?php the_field('second_price'); ?></p>
-                            </div>
+                            <?php
+                                  $first_price = get_field('first_price');   // 通常価格
+                                  $second_price = get_field('second_price'); // 割引価格
+
+                                  // 通常価格と割引価格の表示ルール
+                                  if (!empty($second_price)) {
+                                      // 割引価格がある場合 → 通常価格と割引価格を表示
+                                      if (!empty($first_price)) { ?>
+                                          <div class="campaign-card__price">
+                                              <p class="campaign-card__first-price"><?php echo esc_html($first_price); ?></p>
+                                              <p class="campaign-card__second-price campaign-card__second-price--layout"><?php echo esc_html($second_price); ?></p>
+                                          </div>
+                                      <?php } else { ?>
+                                          <!-- 通常価格がない場合は割引価格のみ表示 -->
+                                          <div class="campaign-card__price">
+                                              <p class="campaign-card__second-price"><?php echo esc_html($second_price); ?></p>
+                                          </div>
+                                      <?php }
+                                  }
+                                  ?>
+
                             <div class="campaign-card__content u-desktop">
                                 <p class="campaign-card__text-item">
                                 <?php the_content(); ?>
                                 <div class="campaign-card__meta">
-                                <time class="campaign-card__date" datetime="2023-06-01"><?php the_field('discount_start_date'); ?></time><span>-</span><time
-                                    class="campaign-card__date" datetime="2023-09-30"><?php the_field('discount_end_date'); ?></time>
+                                                                  <?php
+                                  $start_date = get_field('discount_start_date');
+                                  $end_date = get_field('discount_end_date');
+
+                                  // 両方が存在する場合のみ表示
+                                  if ($start_date && $end_date): ?>
+                                      <time class="campaign-card__date"><?php echo esc_html($start_date); ?></time>
+                                      <span>-</span>
+                                      <time class="campaign-card__date"><?php echo esc_html($end_date); ?></time>
+                                  <?php endif; ?>
                                 <p class="campaign-card__comment">ご予約・お問い合わせはコチラ</p>
                                 </div>
                                 <div class="campaign-card__apply">

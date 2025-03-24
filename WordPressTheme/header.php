@@ -12,19 +12,16 @@
 <body id="top" <?php body_class(); ?>>
   <header class="top-header header" id="js-header">
     <div class="header__inner">
-    <?php if (is_front_page() || is_home()) : ?>
-  <h1 class="header__title">
-<?php else : ?>
-  <div class="header__title">
-<?php endif; ?>
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo-link">
-      <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo.png" decoding="async" alt="CodeUpsのロゴ" width="133" height="50">
-    </a>
-<?php if (is_front_page() || is_home()) : ?>
-  </h1>
-<?php else : ?>
-  </div>
-<?php endif; ?>
+    <?php
+    // 三項演算子を使用して、タグを選択
+    $tag = (is_front_page() || is_home()) ? 'h1' : 'div';
+    ?>
+
+    <<?= $tag; ?> class="header__title">
+      <a href="<?= esc_url(home_url('/')); ?>" class="header__logo-link">
+        <img src="<?= get_theme_file_uri(); ?>/assets/images/common/logo.png" decoding="async" alt="CodeUpsのロゴ" width="133" height="50">
+      </a>
+    </<?= $tag; ?>>
       <button type="button" class="header__drawer hamburger js-hamburger">
         <span></span>
         <span></span>
@@ -97,13 +94,13 @@
                       <li class="sp-nav__body">
                         <ul class="sp-nav__lists">
                           <li class="sp-nav__list">
-                          <a href="<?php echo esc_url(home_url('/campaign/#page-campaign-license_1')); ?>">ライセンス取得</a>
+                          <a href="<?php echo esc_url(home_url('/campaign_category/lisence')); ?>">ライセンス講習</a>
                           </li>
                           <li class="sp-nav__list">
-                            <a href="<?php echo esc_url(home_url('/campaign/#page-campaign-diving_1')); ?>">貸切体験ダイビング</a>
+                          <a href="<?php echo esc_url(home_url('/campaign_category/fun-diving')); ?>">ファンダイビング</a>
                           </li>
                           <li class="sp-nav__list">
-                            <a href="<?php echo esc_url(home_url('/campaign/#page-campaign-night_diving_1')); ?>">ナイトダイビング</a>
+                          <a href="<?php echo esc_url(home_url('/campaign_category/trial-diving')); ?>">体験ダイビング</a>
                           </li>
                         </ul>
                       </li>

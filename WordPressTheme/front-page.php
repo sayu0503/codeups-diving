@@ -187,10 +187,7 @@
       <div class="blog-cards">
         <?php
         $args = array(
-          'post_type'      => 'post',
           'posts_per_page' => 3,
-          'orderby'        => 'date',
-          'order'          => 'DESC',
         );
         $blog_query = new WP_Query($args);
         ?>
@@ -240,8 +237,6 @@
         $args = array(
           'post_type'      => 'voice',
           'posts_per_page' => 2,
-          'orderby'        => 'date',
-          'order'          => 'DESC',
         );
         $voice_query = new WP_Query($args);
         ?>
@@ -300,85 +295,72 @@
             <h2 class="section-header__subtitle">料金一覧</h2>
           </div>
         </div>
-        <?php
-
-$price_page_id = 11;
-
-
-$license_menus = SCF::get('license_menu', $price_page_id);
-$license_prices = SCF::get('license_price', $price_page_id);
-
-$experience_menus = SCF::get('experience_menu', $price_page_id);
-$experience_prices = SCF::get('experience_price', $price_page_id);
-
-$fundiving_menus = SCF::get('fundiving_menu', $price_page_id);
-$fundiving_prices = SCF::get('fundiving_price', $price_page_id);
-
-$specialdiving_menus = SCF::get('specialdiving_menu', $price_page_id);
-$specialdiving_prices = SCF::get('specialdiving_price', $price_page_id);
-?>
-
 
         <div class="price__contents">
-          <div class="price__content">
-             <!-- ライセンス講習 -->
-        <dl class="price__list">
-          <dt class="price__term">ライセンス講習</dt>
-          <?php if (!empty($license_menus)) : ?>
-            <?php foreach ($license_menus as $index => $menu) : ?>
-              <dd class="price__wrap">
-                <p class="price__description"><?php echo esc_html($menu); ?></p>
-                <p class="price__description">¥<?php echo number_format((int) $license_prices[$index]); ?></p>
-              </dd>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </dl>
+        <?php
 
-        <!-- 体験ダイビング -->
-        <dl class="price__list">
-          <dt class="price__term">体験ダイビング</dt>
-          <?php if (!empty($experience_menus)) : ?>
-            <?php foreach ($experience_menus as $index => $menu) : ?>
-              <dd class="price__wrap">
-                <p class="price__description"><?php echo esc_html($menu); ?></p>
-                <p class="price__description">¥<?php echo number_format((int) $experience_prices[$index]); ?></p>
-              </dd>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </dl>
+        $price_page_id = 11;
 
-        <!-- ファンダイビング -->
-        <dl class="price__list">
-          <dt class="price__term">ファンダイビング</dt>
-          <?php if (!empty($fundiving_menus)) : ?>
-            <?php foreach ($fundiving_menus as $index => $menu) : ?>
-              <dd class="price__wrap">
-                <p class="price__description"><?php echo esc_html($menu); ?></p>
-                <p class="price__description">¥<?php echo number_format((int) $fundiving_prices[$index]); ?></p>
-              </dd>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </dl>
+        // データ取得
+        $categories = [
+            'license' => ['menu' => SCF::get('license_menu', $price_page_id), 'price' => SCF::get('license_price', $price_page_id)],
+            'experience' => ['menu' => SCF::get('experience_menu', $price_page_id), 'price' => SCF::get('experience_price', $price_page_id)],
+            'fundiving' => ['menu' => SCF::get('fundiving_menu', $price_page_id), 'price' => SCF::get('fundiving_price', $price_page_id)],
+            'specialdiving' => ['menu' => SCF::get('specialdiving_menu', $price_page_id), 'price' => SCF::get('specialdiving_price', $price_page_id)],
+        ];
 
-        <!-- スペシャルダイビング -->
-        <dl class="price__list">
-          <dt class="price__term">スペシャルダイビング</dt>
-          <?php if (!empty($specialdiving_menus)) : ?>
-            <?php foreach ($specialdiving_menus as $index => $menu) : ?>
-              <dd class="price__wrap">
-                <p class="price__description"><?php echo esc_html($menu); ?></p>
-                <p class="price__description">¥<?php echo number_format((int) $specialdiving_prices[$index]); ?></p>
-              </dd>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </dl>
-          </div>
+        // カテゴリー名の表示用ラベル
+        $labels = [
+            'license' => 'ライセンス講習',
+            'experience' => '体験ダイビング',
+            'fundiving' => 'ファンダイビング',
+            'specialdiving' => 'スペシャルダイビング'
+        ];
+
+        // メニューと価格を表示する関数
+        function display_price_list($menus, $prices) {
+            if (empty($menus) || empty($prices)) return false;  // 両方ない場合は表示しない
+
+            $has_data = false;
+            foreach ($menus as $index => $menu) {
+                if (!empty($menu) && isset($prices[$index]) && $prices[$index] !== '') {
+                    $has_data = true;
+                    ?>
+                    <dd class="price__wrap">
+                        <p class="price__description"><?php echo esc_html($menu); ?></p>
+                        <p class="price__description">¥<?php echo number_format((int) $prices[$index]); ?></p>
+                    </dd>
+                    <?php
+                }
+            }
+            return $has_data;
+        }
+        ?>
+
+    <div class="price__content">
+        <?php foreach ($categories as $key => $data): ?>
+            <?php
+            ob_start();  // 出力バッファリング開始
+            $has_content = display_price_list($data['menu'], $data['price']);
+            $output = ob_get_clean();  // バッファ内容取得
+            ?>
+
+            <?php if ($has_content): ?>
+                <dl class="price__list">
+                    <dt class="price__term"><?php echo $labels[$key]; ?></dt>
+                    <?php echo $output; ?>
+                </dl>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+
           <div class="price__image colorbox">
             <picture>
               <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/price_img_1.jpg" media="(min-width: 768px)">
               <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/price_img_2.jpg" alt="ウミガメが泳いでいる様子" decoding="async" loading="lazy"
                 width="1492" height="984">
             </picture>
+          </div>
           </div>
         </div>
         <div class="price__btn">

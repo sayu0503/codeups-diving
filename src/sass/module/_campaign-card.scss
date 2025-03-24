@@ -101,6 +101,10 @@
     align-items: baseline;
     justify-content: center;
     margin-top: rem(8);
+    gap: rem(16);
+    @include mq(md){
+        gap: rem(44);
+    }
 }
 
 .campaign-card__first-price {
@@ -131,11 +135,8 @@
     font-size: rem(32);
     line-height: 1;
     color: $green-accent;
-    margin-left: rem(16);
-
     @include mq(md) {
         font-size: rem(40);
-        margin-left: rem(24);
     }
 }
 
@@ -169,12 +170,6 @@
     color: $green-accent;
     line-height: calc(18 / 16);
 }
-.campaign-card__meta span {
-
-}
-.campaign-card__date {
-    
-}
 
 .campaign-card__comment {
     font-size: rem(14);
@@ -197,8 +192,8 @@
     text-align: left;
 }
 
-.campaign-card__second-price--layout {
-    @include mq(md) {
-        margin-left: rem(40);
-    }
-}
+// .campaign-card__second-price--layout {
+//     @include mq(md) {
+//         margin-left: rem(40);
+//     }
+// }

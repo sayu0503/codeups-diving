@@ -201,3 +201,11 @@ function getPostViews($postID) {
 
   remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 
+  function custom_archive_title($title){
+    $titleParts=explode(': ',$title);
+    if($titleParts[1]){
+        return $titleParts[1];
+    }
+    return $title;
+}
+add_filter('get_the_archive_title','custom_archive_title');

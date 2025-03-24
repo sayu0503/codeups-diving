@@ -23,19 +23,24 @@
 <div class="layout-faq page-faq">
   <div class="page-faq__inner inner">
     <div class="page-faq__content accordion__items">
-    <?php
+      <?php
       $faq_list = SCF::get('faq_list');
 
+      // FAQが存在する場合のみ処理
       if (!empty($faq_list)) :
         foreach ($faq_list as $faq) :
-          $question = esc_html($faq['question']);
-          $answer = nl2br(esc_html($faq['answer']));
+          $question = isset($faq['question']) ? esc_html($faq['question']) : '';
+          $answer = isset($faq['answer']) ? nl2br(esc_html($faq['answer'])) : '';
+
+          // 質問と答えが両方存在する場合のみ表示
+          if ($question && $answer) :
       ?>
-      <dl class="accordion__item">
-        <dt class="accordion__header"><?php echo $question; ?></dt>
-        <dd class="accordion__content"><?php echo $answer; ?></dd>
-      </dl>
+          <dl class="accordion__item">
+            <dt class="accordion__header"><?php echo $question; ?></dt>
+            <dd class="accordion__content"><?php echo $answer; ?></dd>
+          </dl>
       <?php
+          endif;
         endforeach;
       endif;
       ?>

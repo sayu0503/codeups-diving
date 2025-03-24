@@ -12,15 +12,9 @@
             </div>
             <div class="sub-mv__title">
                 <h1 class="sub-mv__section-header">
-                    <?php
-                    // 表示している日付のフォーマットを取得
-                    if ( is_day() ) {
-                        echo get_the_date( 'Y年m月d日' ) . 'の投稿';
-                    } elseif ( is_month() ) {
-                        echo get_the_date( 'Y年m月' ) . 'の投稿';
-                    } elseif ( is_year() ) {
-                        echo get_the_date( 'Y年' ) . 'の投稿';
-                    }
+                <?php
+                        // アーカイブページのタイトルを表示
+                        the_archive_title();
                     ?>
                 </h1>
             </div>
@@ -67,7 +61,9 @@
                 </div>
 
                 <!-- サイドバー -->
-                <?php get_template_part('parts/sidebar'); ?>
+                <div class="page-blog__sidebar">
+                    <?php get_sidebar('parts'); ?>
+                </div>
             </div>
         </div>
     </section>

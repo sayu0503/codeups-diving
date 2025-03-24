@@ -1,4 +1,5 @@
-<aside class="page-blog__sidebar sidebar">
+
+    <aside class="sidebar">
                     <div class="sidebar__items">
                         <div class="sidebar__item">
                             <h2 class="sidebar__title">人気記事</h2>
@@ -9,11 +10,9 @@
         }
 
         $args = array(
-            'post_type'      => 'post',
             'posts_per_page' => 3,
             'orderby'        => 'meta_value_num',
             'meta_key'       => 'post_views_count',
-            'order'          => 'DESC',
         );
 
         $popular_query = new WP_Query($args);
@@ -90,8 +89,6 @@
                         $campaign_query = new WP_Query(array(
                             'post_type'      => 'campaign',
                             'posts_per_page' => 2,
-                            'orderby'        => 'date',
-                            'order'          => 'DESC',
                         ));
 
                         if ($campaign_query->have_posts()) :
@@ -187,4 +184,4 @@
                                 </div>
                             </div>
                         </div>
-                    </aside>
+                        </aside>

@@ -51,35 +51,41 @@
 </div>
 
 <!-- Gallery -->
+<?php
+$gallery_images = SCF::get('gallery_images');
+
+// 有効な画像があるかチェック
+$valid_images = [];
+
+if (is_array($gallery_images) && !empty($gallery_images)) {
+    foreach ($gallery_images as $image_data) {
+        $image_id = !empty($image_data['image']) ? (int)$image_data['image'] : 0;
+        $alt_text = !empty($image_data['alt']) ? esc_attr($image_data['alt']) : '';
+
+        // 画像IDが存在する場合のみ追加
+        if ($image_id) {
+            $image_url = wp_get_attachment_image_url($image_id, 'full');
+            if ($image_url) {
+                $valid_images[] = ['url' => $image_url, 'alt' => $alt_text];
+            }
+        }
+    }
+}
+
+// 写真が1枚以上ある場合のみセクションを表示
+if (!empty($valid_images)) : ?>
 <section class="layout-gallery gallery">
     <div class="gallery__inner inner">
         <div class="section-header">
-            <p class="section-header__title section-header__title--line-height"> Gallery</p>
+            <p class="section-header__title section-header__title--line-height">Gallery</p>
             <h2 class="section-header__subtitle section-header__subtitle--layout">フォト</h2>
         </div>
         <div class="gallery__contents">
-        <?php
-                $gallery_images = SCF::get('gallery_images');
-
-                if (is_array($gallery_images) && !empty($gallery_images)) :
-                    foreach ($gallery_images as $image_data) :
-                        $image_id = !empty($image_data['image']) ? (int)$image_data['image'] : 0;
-                        $alt_text = !empty($image_data['alt']) ? esc_attr($image_data['alt']) : '';
-
-                        $image_url = ($image_id) ? wp_get_attachment_image_url($image_id, 'full') : '';
-
-                        if ($image_url) :
-                ?>
+            <?php foreach ($valid_images as $image) : ?>
                 <div class="gallery__image js-modal-open">
-                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo $alt_text; ?>" decoding="async" loading="lazy">
+                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
                 </div>
-                <?php
-                        endif;
-                    endforeach;
-                else:
-                ?>
-                <p>画像が登録されていません。</p>
-                <?php endif; ?>
+            <?php endforeach; ?>
 
             <!-- モーダル -->
             <div class="modal js-modal">
@@ -90,5 +96,7 @@
         </div>
     </div>
 </section>
+<?php endif; ?>
+
 
 <?php get_footer(); ?>
