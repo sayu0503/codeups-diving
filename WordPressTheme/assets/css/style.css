@@ -816,14 +816,6 @@ body.error404 .breadcrumb__inner span a {
 	z-index: -1;
 }
 
-.button__submit:hover,
-.button__submit:hover .custom-submit,
-.button__submit:hover .button-arrow::after {
-	border-bottom: 0.0625rem solid #408F95;
-	border-right: 0.0625rem solid #408F95;
-	color: #408F95;
-}
-
 .campaign-card {
 	box-shadow: 0.125rem 0.0625rem 0.625rem 0px rgba(0, 0, 0, 0.25);
 	display: grid;
