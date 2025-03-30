@@ -26,122 +26,175 @@
     <div class="page-price__contents">
 
       <!-- ライセンス講習 -->
-      <?php
-      $license_menus = SCF::get('license_menu');
-      $license_prices = SCF::get('license_price');
+              <?php
+        $license_data = SCF::get('license_group');
 
-      // コースと料金が両方揃っているデータのみ抽出
-      $valid_license_items = [];
-      if (!empty($license_menus) && !empty($license_prices)) {
-        foreach ($license_menus as $index => $menu) {
-          $price = isset($license_prices[$index]) ? $license_prices[$index] : '';
-          if (!empty($menu) && !empty($price)) {
-            $valid_license_items[] = ['menu' => $menu, 'price' => $price];
-          }
-        }
-      }
-
-      // 表示判定（揃っているデータが1件以上ある場合に表示）
-      if (!empty($valid_license_items)) : ?>
+        if (!empty($license_data)) :
+            $has_data = false;
+            foreach ($license_data as $item) {
+                if (!empty($item['license_course']) && !empty($item['license_price'])) {
+                    $has_data = true;
+                    break;
+                }
+            }
+            if ($has_data) :
+        ?>
         <div class="page-price__group" id="page-price__group01">
-          <h2 class="page-price__title">ライセンス講習</h2>
-          <div class="page-price__items">
-            <?php foreach ($valid_license_items as $item) : ?>
-              <div class="page-price__item">
-                <span class="page-price__list"><?php echo esc_html($item['menu']); ?></span>
-                <span class="page-price__price">¥<?php echo number_format((int)$item['price']); ?></span>
-              </div>
-            <?php endforeach; ?>
-          </div>
+            <h2 class="page-price__title">
+                <?= esc_html(SCF::get('license_title')) ?: 'ライセンス講習'; ?>
+            </h2>
+            <div class="page-price__items">
+                <?php foreach ($license_data as $item) : ?>
+                    <?php if (!empty($item['license_course']) && !empty($item['license_price'])) : ?>
+                        <div class="page-price__item">
+                            <span class="page-price__list">
+                                <?= nl2br(esc_html($item['license_course'])); ?>
+                            </span>
+                            <span class="page-price__price">
+                                ¥<?= number_format((int)$item['license_price']); ?>
+                            </span>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
-      <?php endif; ?>
+        <?php
+            endif; // $has_dataチェック終了
+        endif; // データ存在チェック終了
+        ?>
 
-      <!-- 体験ダイビング -->
       <?php
-      $experience_menus = SCF::get('experience_menu');
-      $experience_prices = SCF::get('experience_price');
+      // 【体験ダイビング】のデータ取得
+      $experience_data = SCF::get('experience_group');
 
-      $valid_experience_items = [];
-      if (!empty($experience_menus) && !empty($experience_prices)) {
-        foreach ($experience_menus as $index => $menu) {
-          $price = isset($experience_prices[$index]) ? $experience_prices[$index] : '';
-          if (!empty($menu) && !empty($price)) {
-            $valid_experience_items[] = ['menu' => $menu, 'price' => $price];
+      // 表示判定フラグ
+      $has_experience = false;
+
+      // コースと料金が両方揃っているデータが1件でもあるかチェック
+      if (!empty($experience_data)) {
+          foreach ($experience_data as $item) {
+              if (!empty($item['experience_course']) && !empty($item['experience_price'])) {
+                  $has_experience = true;
+                  break;  // 1件でも見つかれば表示するためループを抜ける
+              }
           }
-        }
       }
 
-      if (!empty($valid_experience_items)) : ?>
-        <div class="page-price__group" id="page-price__group02">
-          <h2 class="page-price__title">体験ダイビング</h2>
+      // データが存在する場合のみ表示
+      if ($has_experience) :
+      ?>
+      <!-- セクション2：体験ダイビング -->
+      <div class="page-price__group" id="page-price__group02">
+          <h2 class="page-price__title">
+              <?= esc_html(SCF::get('experience_title')) ?: '体験ダイビング'; ?>
+          </h2>
           <div class="page-price__items">
-            <?php foreach ($valid_experience_items as $item) : ?>
-              <div class="page-price__item">
-                <span class="page-price__list"><?php echo esc_html($item['menu']); ?></span>
-                <span class="page-price__price">¥<?php echo number_format((int)$item['price']); ?></span>
-              </div>
-            <?php endforeach; ?>
+              <?php foreach ($experience_data as $item) : ?>
+                  <?php if (!empty($item['experience_course']) && !empty($item['experience_price'])) : ?>
+                      <div class="page-price__item">
+                          <span class="page-price__list">
+                              <?= nl2br(esc_html($item['experience_course'])); ?>
+                          </span>
+                          <span class="page-price__price">
+                              ¥<?= number_format((int)$item['experience_price']); ?>
+                          </span>
+                      </div>
+                  <?php endif; ?>
+              <?php endforeach; ?>
           </div>
-        </div>
-      <?php endif; ?>
-
-      <!-- ファンダイビング -->
+      </div>
       <?php
-      $fundiving_menus = SCF::get('fundiving_menu');
-      $fundiving_prices = SCF::get('fundiving_price');
+      endif; // 表示終了
+      ?>
 
-      $valid_fundiving_items = [];
-      if (!empty($fundiving_menus) && !empty($fundiving_prices)) {
-        foreach ($fundiving_menus as $index => $menu) {
-          $price = isset($fundiving_prices[$index]) ? $fundiving_prices[$index] : '';
-          if (!empty($menu) && !empty($price)) {
-            $valid_fundiving_items[] = ['menu' => $menu, 'price' => $price];
-          }
+        <?php
+        // 【ファンダイビング】のデータ取得
+        $fundiving_data = SCF::get('fundiving_group'); 
+
+        // 表示判定フラグ
+        $has_fundiving = false; 
+
+        // コースと料金が両方揃っているデータが1件でもあるかチェック
+        if (!empty($fundiving_data)) {
+            foreach ($fundiving_data as $item) {
+                if (!empty($item['fundiving_course']) && !empty($item['fundiving_price'])) {
+                    $has_fundiving = true;
+                    break;  // 1件でも見つかれば表示するためループを抜ける
+                }
+            }
         }
-      }
 
-      if (!empty($valid_fundiving_items)) : ?>
+        // データが存在する場合のみ表示
+        if ($has_fundiving) :
+        ?>
+        <!-- セクション3：ファンダイビング -->
         <div class="page-price__group" id="page-price__group03">
-          <h2 class="page-price__title">ファンダイビング</h2>
-          <div class="page-price__items">
-            <?php foreach ($valid_fundiving_items as $item) : ?>
-              <div class="page-price__item">
-                <span class="page-price__list"><?php echo esc_html($item['menu']); ?></span>
-                <span class="page-price__price">¥<?php echo number_format((int)$item['price']); ?></span>
-              </div>
-            <?php endforeach; ?>
-          </div>
+            <h2 class="page-price__title">
+                <?= esc_html(SCF::get('fundiving_title')) ?: 'ファンダイビング'; ?>
+            </h2>
+            <div class="page-price__items">
+                <?php foreach ($fundiving_data as $item) : ?>
+                    <?php if (!empty($item['fundiving_course']) && !empty($item['fundiving_price'])) : ?>
+                        <div class="page-price__item">
+                            <span class="page-price__list">
+                                <?= nl2br(esc_html($item['fundiving_course'])); ?>
+                            </span>
+                            <span class="page-price__price">
+                                ¥<?= number_format((int)$item['fundiving_price']); ?>
+                            </span>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
-      <?php endif; ?>
+        <?php
+        endif; // 表示終了
+        ?>
 
-      <!-- スペシャルダイビング -->
-      <?php
-      $specialdiving_menus = SCF::get('specialdiving_menu');
-      $specialdiving_prices = SCF::get('specialdiving_price');
 
-      $valid_specialdiving_items = [];
-      if (!empty($specialdiving_menus) && !empty($specialdiving_prices)) {
-        foreach ($specialdiving_menus as $index => $menu) {
-          $price = isset($specialdiving_prices[$index]) ? $specialdiving_prices[$index] : '';
-          if (!empty($menu) && !empty($price)) {
-            $valid_specialdiving_items[] = ['menu' => $menu, 'price' => $price];
-          }
-        }
-      }
+            <?php
+            // 【スペシャルダイビング】のデータ取得
+            $specialdiving_data = SCF::get('specialdiving_group'); 
 
-      if (!empty($valid_specialdiving_items)) : ?>
-        <div class="page-price__group">
-          <h2 class="page-price__title">スペシャルダイビング</h2>
-          <div class="page-price__items">
-            <?php foreach ($valid_specialdiving_items as $item) : ?>
-              <div class="page-price__item">
-                <span class="page-price__list"><?php echo esc_html($item['menu']); ?></span>
-                <span class="page-price__price">¥<?php echo number_format((int)$item['price']); ?></span>
-              </div>
-            <?php endforeach; ?>
-          </div>
-        </div>
-      <?php endif; ?>
+            // 表示判定フラグ
+            $has_specialdiving = false; 
+
+            // コースと料金が両方揃っているデータが1件でもあるかチェック
+            if (!empty($specialdiving_data)) {
+                foreach ($specialdiving_data as $item) {
+                    if (!empty($item['specialdiving_course']) && !empty($item['specialdiving_price'])) {
+                        $has_specialdiving = true;
+                        break;  // 1件でも見つかれば表示するためループを抜ける
+                    }
+                }
+            }
+
+            // データが存在する場合のみ表示
+            if ($has_specialdiving) :
+            ?>
+            <!-- セクション4：スペシャルダイビング -->
+            <div class="page-price__group" id="page-price__group04">
+                <h2 class="page-price__title">
+                    <?= esc_html(SCF::get('specialdiving_title')) ?: 'スペシャルダイビング'; ?>
+                </h2>
+                <div class="page-price__items">
+                    <?php foreach ($specialdiving_data as $item) : ?>
+                        <?php if (!empty($item['specialdiving_course']) && !empty($item['specialdiving_price'])) : ?>
+                            <div class="page-price__item">
+                                <span class="page-price__list">
+                                    <?= nl2br(esc_html($item['specialdiving_course'])); ?>
+                                </span>
+                                <span class="page-price__price">
+                                    ¥<?= number_format((int)$item['specialdiving_price']); ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php
+            endif; // 表示終了
+            ?>
 
     </div>
   </div>

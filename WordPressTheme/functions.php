@@ -209,3 +209,163 @@ function getPostViews($postID) {
     return $title;
 }
 add_filter('get_the_archive_title','custom_archive_title');
+
+function login_logo() {
+    echo '<style type="text/css">
+      #login h1 a {
+        background: url('.get_template_directory_uri().'/assets/images/common/logo-green.svg) no-repeat center;
+        background-size: contain;
+        width: 266px;
+        height: 150px;
+      }
+
+    }
+    </style>';
+  }
+  add_action('login_head', 'login_logo');
+
+  function custom_login_logo_url() {
+	return home_url();
+}
+add_filter( 'login_headerurl', 'custom_login_logo_url' );
+
+//サムネイルカラム追加
+function customize_manage_posts_columns($columns) {
+    $columns['thumbnail'] = __('Thumbnail');
+    return $columns;
+}
+add_filter( 'manage_posts_columns', 'customize_manage_posts_columns' );
+
+//サムネイル画像表示
+function customize_manage_posts_custom_column($column_name, $post_id) {
+    if ( 'thumbnail' == $column_name) {
+        $thum = get_the_post_thumbnail($post_id, 'small', array( 'style'=>'width:100px;height:auto;' ));
+    } if ( isset($thum) && $thum ) {
+        echo $thum;
+    } else {
+        echo __('None');
+    }
+}
+add_action( 'manage_posts_custom_column', 'customize_manage_posts_custom_column', 10, 2 );
+
+
+
+// ウィジェットを3つ追加
+function add_client_shortcut_widgets() {
+    wp_add_dashboard_widget('content_update_widget', '📝 コンテンツ更新', 'content_update_widget_content');
+    wp_add_dashboard_widget('info_edit_widget', '🔧 情報編集', 'info_edit_widget_content');
+    wp_add_dashboard_widget('media_manage_widget', '🖼️ メディア管理', 'media_manage_widget_content');
+}
+
+// CSSスタイル
+function client_shortcut_widget_styles() {
+    ?>
+    <style>
+        /* 共通ボタンスタイル */
+        .shortcut-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .shortcut-container:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        .shortcut-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: calc(50% - 7.5px);  /* 横並び2列 */
+            min-height: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            background: #408F95;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .shortcut-btn:hover {
+            text-decoration: none;
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 0 2px rgba(0,0,0,0.2);
+        }
+
+        /* アイコンスタイル */
+        .dashicons {
+            font-size: 20px;
+        }
+
+        /* ウィジェットのマージン調整 */
+        .shortcut-widget {
+            margin-bottom: 20px;
+        }
+    </style>
+    <?php
+}
+add_action('admin_head', 'client_shortcut_widget_styles');
+
+
+// 📝 コンテンツ更新ウィジェット
+function content_update_widget_content() {
+    ?>
+    <div class="shortcut-container">
+        <a href="<?php echo admin_url('edit.php?post_type=post'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-admin-post"></span>ブログ一覧
+        </a>
+        <a href="<?php echo admin_url('post-new.php'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-plus"></span>ブログ新規追加
+        </a>
+    </div>
+    <div class="shortcut-container">
+        <a href="<?php echo admin_url('edit.php?post_type=campaign'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-megaphone"></span>キャンペーン一覧
+        </a>
+        <a href="<?php echo admin_url('post-new.php?post_type=campaign'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-plus"></span>キャンペーン新規追加
+        </a>
+     </div>
+     <div class="shortcut-container">
+        <a href="<?php echo admin_url('edit.php?post_type=voice'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-format-status"></span>お客様の声一覧
+        </a>
+        <a href="<?php echo admin_url('post-new.php?post_type=voice'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-plus"></span>お客様の声新規追加
+        </a>
+    </div>
+    <?php
+}
+
+// 🔧 情報編集ウィジェット
+function info_edit_widget_content() {
+    ?>
+    <div class="shortcut-container">
+        <a href="<?php echo admin_url('post.php?post=11&action=edit'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-money"></span>料金一覧
+        </a>
+        <a href="<?php echo admin_url('post.php?post=13&action=edit'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-editor-help"></span>よくある質問
+        </a>
+    </div>
+    <?php
+}
+
+// 🖼️ メディア管理ウィジェット
+function media_manage_widget_content() {
+    ?>
+    <div class="shortcut-container">
+        <a href="<?php echo admin_url('post.php?post=21&action=edit'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-admin-home"></span>ファーストビュー
+        </a>
+        <a href="<?php echo admin_url('post.php?post=7&action=edit'); ?>" class="shortcut-btn">
+            <span class="dashicons dashicons-format-gallery"></span>ギャラリー画像
+        </a>
+    </div>
+    <?php
+}
+
+// ダッシュボードにウィジェット追加
+add_action('wp_dashboard_setup', 'add_client_shortcut_widgets');

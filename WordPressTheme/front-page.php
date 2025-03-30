@@ -3,41 +3,52 @@
 
   <main>
     <!-- メインビュー -->
-    <?php
-        $top_page_id = get_option('page_on_front');
-        $mv_sliders = SCF::get('mv_slider', $top_page_id);
-    ?>
+   <div class="mv" id="js-mv">
+    <div class="mv__inner">
+        <div class="swiper js-mv-swiper">
+            <div class="swiper-wrapper">
 
-        <div class="mv" id="js-mv">
-          <div class="mv__inner">
-            <?php if (!empty($mv_sliders)): ?>
-              <div class="swiper js-mv-swiper">
-                <div class="swiper-wrapper">
-                  <?php foreach ($mv_sliders as $slide): ?>
+                <?php
+                // PCとSPの画像フィールドを取得
+                $pc_images = get_field('fv_pc');
+                $sp_images = get_field('fv_sp');
+
+                // 画像が存在する場合のみ表示
+                if ($pc_images && $sp_images) :
+                    for ($i = 1; $i <= 4; $i++) :
+                        $pc_image = $pc_images["fv_pc{$i}"];
+                        $sp_image = $sp_images["fv_sp{$i}"];
+
+                        // PCとSPの画像URLを取得
+                        $pc_url = $pc_image ? wp_get_attachment_image_src($pc_image['ID'], 'full')[0] : '';
+                        $sp_url = $sp_image ? wp_get_attachment_image_src($sp_image['ID'], 'full')[0] : '';
+                        ?>
+
+                        <div class="swiper-slide">
+                            <picture>
+                                <?php if ($pc_url): ?>
+                                    <source srcset="<?= esc_url($pc_url); ?>" media="(min-width: 768px)" width="2880" height="1536">
+                                <?php endif; ?>
+                                <?php if ($sp_url): ?>
+                                    <img src="<?= esc_url($sp_url); ?>" alt="<?= esc_attr($pc_image['alt'] ?: '画像'); ?>" decoding="async" width="750" height="1334">
+                                <?php endif; ?>
+                            </picture>
+                        </div>
+
                     <?php
-                      $image_pc_url = wp_get_attachment_url($slide['mv_image_pc']);
-                      $image_sp_url = wp_get_attachment_url($slide['mv_image_sp']);
-                      $alt_text = esc_attr($slide['mv_alt']);
-                    ?>
-                    <div class="swiper-slide">
-                      <picture>
-                        <source srcset="<?php echo esc_url($image_pc_url); ?>" media="(min-width: 768px)" width="2880" height="1536">
-                        <img src="<?php echo esc_url($image_sp_url); ?>" alt="<?php echo $alt_text; ?>" decoding="async" width="750" height="1334">
-                      </picture>
-                    </div>
-                  <?php endforeach; ?>
-                </div>
-              </div>
-            <?php else: ?>
-              <p>スライダー画像が設定されていません。</p>
-            <?php endif; ?>
+                    endfor;
+                endif;
+                ?>
+            </div>
 
             <div class="mv__title-wrap">
-              <p class="mv__title">diving</p>
-              <p class="mv__subtitle">into the ocean</p>
+                <p class="mv__title">diving</p>
+                <p class="mv__subtitle">into the ocean</p>
             </div>
-          </div>
         </div>
+    </div>
+</div>
+
 
     <!-- Campaign -->
     <section class="top-campaign campaign">
@@ -295,70 +306,72 @@
         </div>
 
         <div class="price__contents">
+        <div class="price__content">
+
         <?php
+        // 下層ページIDを指定
+        $sub_page_id = 11;
 
-        $price_page_id = 11;
-
-        // データ取得
-        $categories = [
-            'license' => ['menu' => SCF::get('license_menu', $price_page_id), 'price' => SCF::get('license_price', $price_page_id)],
-            'experience' => ['menu' => SCF::get('experience_menu', $price_page_id), 'price' => SCF::get('experience_price', $price_page_id)],
-            'fundiving' => ['menu' => SCF::get('fundiving_menu', $price_page_id), 'price' => SCF::get('fundiving_price', $price_page_id)],
-            'specialdiving' => ['menu' => SCF::get('specialdiving_menu', $price_page_id), 'price' => SCF::get('specialdiving_price', $price_page_id)],
+        // セクション情報
+        $sections = [
+            'license'       => ['group' => 'license_group', 'title' => 'ライセンス講習', 'course' => 'license_course', 'price' => 'license_price'],
+            'experience'    => ['group' => 'experience_group', 'title' => '体験ダイビング', 'course' => 'experience_course', 'price' => 'experience_price'],
+            'fundiving'     => ['group' => 'fundiving_group', 'title' => 'ファンダイビング', 'course' => 'fundiving_course', 'price' => 'fundiving_price'],
+            'specialdiving' => ['group' => 'specialdiving_group', 'title' => 'スペシャルダイビング', 'course' => 'specialdiving_course', 'price' => 'specialdiving_price']
         ];
 
-        // カテゴリー名の表示用ラベル
-        $labels = [
-            'license' => 'ライセンス講習',
-            'experience' => '体験ダイビング',
-            'fundiving' => 'ファンダイビング',
-            'specialdiving' => 'スペシャルダイビング'
-        ];
+        $section_count = 0;
 
-        // メニューと価格を表示する関数
-        function display_price_list($menus, $prices) {
-            if (empty($menus) || empty($prices)) return false;  // 両方ない場合は表示しない
+        foreach ($sections as $key => $section) :
+            $data = SCF::get($section['group'], $sub_page_id);
 
-            $has_data = false;
-            foreach ($menus as $index => $menu) {
-                if (!empty($menu) && isset($prices[$index]) && $prices[$index] !== '') {
-                    $has_data = true;
-                    ?>
-                    <dd class="price__wrap">
-                        <p class="price__description"><?php echo esc_html($menu); ?></p>
-                        <p class="price__description">¥<?php echo number_format((int) $prices[$index]); ?></p>
-                    </dd>
-                    <?php
+            if (!empty($data)) :
+                $has_data = false;
+
+                // 表示するデータがあるか判定
+                foreach ($data as $item) {
+                    if (!empty($item[$section['course']]) && !empty($item[$section['price']])) {
+                        $has_data = true;
+                        break;
+                    }
                 }
-            }
-            return $has_data;
-        }
+
+                if ($has_data) :
+                    $section_count++;  // セクションカウント
+        ?>
+                    <dl class="price__list <?= $section_count > 1 ? 'price__list--secondary' : ''; ?>">
+                        <dt class="price__term">
+                            <?= esc_html(SCF::get($section['group'] . '_title', $sub_page_id)) ?: $section['title']; ?>
+                        </dt>
+
+                        <?php foreach ($data as $item) : ?>
+                            <?php if (!empty($item[$section['course']]) && !empty($item[$section['price']])) : ?>
+                                <dd class="price__wrap">
+                                    <p class="price__description">
+                                        <?= nl2br(esc_html($item[$section['course']])); ?>
+                                    </p>
+                                    <p class="price__description">
+                                        ¥<?= number_format((int)$item[$section['price']]); ?>
+                                    </p>
+                                </dd>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </dl>
+        <?php
+                endif;
+            endif;
+        endforeach;
         ?>
 
-    <div class="price__content">
-        <?php foreach ($categories as $key => $data): ?>
-            <?php
-            ob_start();  // 出力バッファリング開始
-            $has_content = display_price_list($data['menu'], $data['price']);
-            $output = ob_get_clean();  // バッファ内容取得
-            ?>
-
-            <?php if ($has_content): ?>
-                <dl class="price__list">
-                    <dt class="price__term"><?php echo $labels[$key]; ?></dt>
-                    <?php echo $output; ?>
-                </dl>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </div>
-
-          <div class="price__image colorbox">
+        </div>
+    <div class="price__image colorbox">
             <picture>
               <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/price_img_1.jpg" media="(min-width: 768px)">
               <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/price_img_2.jpg" alt="ウミガメが泳いでいる様子" decoding="async" loading="lazy"
                 width="1492" height="984">
             </picture>
           </div>
+        </div>
           </div>
         </div>
         <div class="price__btn">
