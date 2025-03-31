@@ -294,6 +294,10 @@ function client_shortcut_widget_styles() {
             box-shadow: 0 0 2px rgba(0,0,0,0.2);
         }
 
+        .btn-view {
+            background: #959595;
+        }
+
         /* アイコンスタイル */
         .dashicons {
             font-size: 20px;
@@ -313,7 +317,7 @@ add_action('admin_head', 'client_shortcut_widget_styles');
 function content_update_widget_content() {
     ?>
     <div class="shortcut-container">
-        <a href="<?php echo admin_url('edit.php?post_type=post'); ?>" class="shortcut-btn">
+        <a href="<?php echo admin_url('edit.php?post_type=post'); ?>" class="shortcut-btn btn-view">
             <span class="dashicons dashicons-admin-post"></span>ブログ一覧
         </a>
         <a href="<?php echo admin_url('post-new.php'); ?>" class="shortcut-btn">
@@ -321,7 +325,7 @@ function content_update_widget_content() {
         </a>
     </div>
     <div class="shortcut-container">
-        <a href="<?php echo admin_url('edit.php?post_type=campaign'); ?>" class="shortcut-btn">
+        <a href="<?php echo admin_url('edit.php?post_type=campaign'); ?>" class="shortcut-btn btn-view">
             <span class="dashicons dashicons-megaphone"></span>キャンペーン一覧
         </a>
         <a href="<?php echo admin_url('post-new.php?post_type=campaign'); ?>" class="shortcut-btn">
@@ -329,10 +333,10 @@ function content_update_widget_content() {
         </a>
      </div>
      <div class="shortcut-container">
-        <a href="<?php echo admin_url('edit.php?post_type=voice'); ?>" class="shortcut-btn">
+        <a href="<?php echo admin_url('edit.php?post_type=voice'); ?>" class="shortcut-btn btn-view">
             <span class="dashicons dashicons-format-status"></span>お客様の声一覧
         </a>
-        <a href="<?php echo admin_url('post-new.php?post_type=voice'); ?>" class="shortcut-btn">
+        <a href="<?php echo admin_url('post-new.php?post_type=voice'); ?>" class="shortcut-btn ">
             <span class="dashicons dashicons-plus"></span>お客様の声新規追加
         </a>
     </div>
@@ -357,10 +361,10 @@ function info_edit_widget_content() {
 function media_manage_widget_content() {
     ?>
     <div class="shortcut-container">
-        <a href="<?php echo admin_url('post.php?post=21&action=edit'); ?>" class="shortcut-btn">
+        <a href="<?php echo admin_url('post.php?post=21&action=edit'); ?>" class="shortcut-btn" title="ファーストビュー画像を管理します">
             <span class="dashicons dashicons-admin-home"></span>ファーストビュー
         </a>
-        <a href="<?php echo admin_url('post.php?post=7&action=edit'); ?>" class="shortcut-btn">
+        <a href="<?php echo admin_url('post.php?post=7&action=edit'); ?>" class="shortcut-btn" title="ギャラリー画像を追加・変更します">
             <span class="dashicons dashicons-format-gallery"></span>ギャラリー画像
         </a>
     </div>
