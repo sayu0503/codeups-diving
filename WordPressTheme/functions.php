@@ -407,3 +407,31 @@ function media_manage_widget_content() {
 
 // ダッシュボードにウィジェット追加
 add_action('wp_dashboard_setup', 'add_client_shortcut_widgets');
+
+
+function remove_editor_from_specific_pages() {
+    if (!is_admin()) return;
+
+    global $pagenow;
+
+    // 編集画面または新規作成画面のみ対象
+    if ($pagenow === 'post.php' || $pagenow === 'post-new.php') {
+        // 投稿IDの取得
+        $post_id = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : null);
+        if (!$post_id) return;
+
+        // 編集中ページのスラッグ取得
+        $page_slug = get_post_field('post_name', $post_id);
+        // トップページIDを取得
+        $front_page_id = get_option('page_on_front');
+
+        // 非表示にしたいスラッグ一覧
+        $slugs_to_hide = ['about-us', 'blog', 'information', 'contact', 'thanks', 'sitemap'];
+
+        // トップページまたはスラッグ一致する場合にエディタを非表示
+        if ((int)$post_id === (int)$front_page_id || in_array($page_slug, $slugs_to_hide)) {
+            remove_post_type_support('page', 'editor');
+        }
+    }
+}
+add_action('admin_init', 'remove_editor_from_specific_pages');
